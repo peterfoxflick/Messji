@@ -18,9 +18,9 @@ public class HomeActivity extends AppCompatActivity {
 
     User contacts[] =
             {
-                    new User(R.drawable.ic_users_1, "Henrique Tedeschi", new Message("Hey, what's up?", new Date())),
-                    new User(R.drawable.ic_users_2, "Peter Flick", new Message("No, I am eating rn..", new Date())),
-                    new User(R.drawable.ic_users_3, "Thomas Rosales", new Message("Hahaha, totally!", new Date())),
+                    new User(R.drawable.ic_users_1, "Henrique Tedeschi"),
+                    new User(R.drawable.ic_users_2, "Peter Flick"),
+                    new User(R.drawable.ic_users_3, "Thomas Rosales"),
             };
 
     @Override
@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

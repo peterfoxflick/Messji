@@ -37,8 +37,8 @@ public class UsersAdapter extends ArrayAdapter<User> {
         // Populate the data into the template view using the data object
         imgAvatar.setImageResource(user.avatar);
         txtName.setText(user.name);
-        txtLastMessage.setText(user.lastMessage.message);
-        txtDateLastMessage.setText(new SimpleDateFormat("HH:mm MM/dd/yy").format(user.lastMessage.date));
+        txtLastMessage.setText(user.lastMessage.getText());
+        txtDateLastMessage.setText(new SimpleDateFormat("HH:mm MM/dd/yy").format(user.lastMessage.getDate()));
 
         // Return the completed view to render on screen
         return convertView;

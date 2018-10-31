@@ -27,5 +27,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation "com.scaledrone:scaledrone-java:0.3.0"             // I added this for using the scaledrone module
+    implementation "com.scaledrone:scaledrone-java:0.3.0"
+    // I added this for using the scaledrone module
 }

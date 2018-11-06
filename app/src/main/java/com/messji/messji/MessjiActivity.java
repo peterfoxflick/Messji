@@ -1,9 +1,6 @@
 package com.messji.messji;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +10,9 @@ import java.util.ArrayList;
 
 public class MessjiActivity extends AppCompatActivity {
 
-    User contacts[] =
+    User myUser = new User("Douglas", "C. Hanson", "+18017457869", R.drawable.avitar);
+
+    User users[] =
             {
                     new User("Henrique", "Tedeschi", "+18013477691", R.drawable.ic_users_1),
                     new User("Peter", "Flick", "+12087018132", R.drawable.ic_users_2),
@@ -35,16 +34,19 @@ public class MessjiActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listContacts);
         listView.setAdapter(adapter);
 
-        adapter.addAll(contacts);
+        adapter.addAll(users);
     }
 
     public void openMessage(View view) {
         Intent intent = new Intent(this, MessengerActivity.class);
+        // this will not be User class, it will be a conversation
+        intent.putExtra("myUser", myUser);
         startActivity(intent);
     }
 
     public void openSettings(View view) {
         Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("myUser", myUser);
         startActivity(intent);
     }
 }

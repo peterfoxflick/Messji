@@ -1,7 +1,9 @@
 package com.messji.messji;
 
-class User {
-    private String id;
+import java.io.Serializable;
+
+class User implements Serializable {
+    private int id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -14,11 +16,11 @@ class User {
         this.photo = photo;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -59,7 +59,8 @@ public class MessageAdapter extends BaseAdapter {
             holder.messageBody = (TextView) convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
-            holder.name.setText(message.getData().getFullName());
+            //holder.name.setText(message.getData().getFullName());   //changing this since we are using id's instead of data
+            holder.name.setText(message.getMessage_id()); //This will replace the above line of code - need to add a getName from suer class
             holder.messageBody.setText(message.getText());
             GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
         }

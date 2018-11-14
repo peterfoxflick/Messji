@@ -1,5 +1,10 @@
 package com.messji.messji;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +15,28 @@ public class MessengerActivity extends AppCompatActivity {
     private EditText editText;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
+    private int convId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent intent = getIntent();
+        convId = intent.getIntExtra("convId", -1);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);
         editText = (EditText) findViewById(R.id.editText);
+
+        // if negative 1 go back to home
+
+        //Use conv ID to populate messages here
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if(prefs.getInt("lastConvId", -1) == convId){
+            String draft = prefs.getString("draftText", "");
+            editText.setText(draft);
+        }
 
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
@@ -46,5 +67,14 @@ public class MessengerActivity extends AppCompatActivity {
             /*catch (JsonProcessingException e) {
             e.printStackTrace();
         }*/
+
+    public void onClose(){
+
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("draftText",editText.getText().toString());
+        editor.putInt("convId", convId );
+        editor.commit();
+    }
 }
 

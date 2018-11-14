@@ -32,19 +32,17 @@ public class Conversation {
         this.title = title;
     }
 
-
     public void addMessage(int id){
         messages.add(id);
     }
 
-    public String getLastUpdate(){
+    public Integer getLastMessage(){
         if (messages != null && !messages.isEmpty()) {
             Integer lastId = messages.get(messages.size()-1);
-            //Get message by id with id == lastId
-            //Return the timestamp of the last mes
+            return lastId;
         }
 
-        return "";
+        return null;
     }
 
 }

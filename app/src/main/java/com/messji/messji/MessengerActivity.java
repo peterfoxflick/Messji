@@ -1,6 +1,7 @@
 package com.messji.messji;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,7 +40,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         Serializable userExtra = intent.getSerializableExtra("User");
         User user = (User) new Gson().fromJson(userExtra.toString(), User.class);
-
+        this.setTitle(user.getFullName());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);

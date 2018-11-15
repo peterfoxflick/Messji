@@ -15,8 +15,8 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 
 public class MessengerActivity extends AppCompatActivity implements Serializable {
+
     private EditText editText;
-    // private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
     private int convId;
@@ -49,7 +49,32 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
+        };
+
+    public void sendMessage(View view) {
+        System.out.println("IN SEND MESSAGE FUNCTION");
+
+        /*try {*/
+        // if the clientID of the message sender is the same as our's it was sent by us
+        boolean belongsToCurrentUser = true;//Just for now
+        // if it was instead an object we could use a similar pattern to data parsing
+        final Message message = new Message(editText.getText().toString(), 0, 0, belongsToCurrentUser);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                messageAdapter.add(message);
+                // scroll the ListView to the last added element
+                messagesView.setSelection(messagesView.getCount() - 1);
+            }
+        });
+
+        // Clear the text field after sending the message
+        editText.getText().clear();
     }
+
+            /*catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }*/
 
     public void onClose(){
 
@@ -59,12 +84,5 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         editor.putInt("convId", convId );
         editor.commit();
     }
-
-
-
-
-    public void sendMessage(View view) {
-        System.out.println("IN SENDMESSAGE FUNCTION");
-
-    }
 }
+

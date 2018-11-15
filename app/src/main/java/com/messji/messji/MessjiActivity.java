@@ -8,26 +8,44 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MessjiActivity extends AppCompatActivity {
 
     User myUser = new User("Douglas", "C. Hanson", "+18017457869", R.drawable.avitar);
-
-    User users[] =
-            {
-                    new User("Henrique", "Tedeschi", "+18013477691", R.drawable.ic_users_1),
-                    new User("Peter", "Flick", "+12087018132", R.drawable.ic_users_2),
-                    new User("Thomas", "Rosales", "+17142618202", R.drawable.ic_users_3)
-            };
+    User[] contacts = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String contactsJson = null;
+        try {
+            InputStream is = getAssets().open("contacts.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            contactsJson = new String(buffer, "UTF-8");
+
+            contacts = new Gson().fromJson(contactsJson, User[].class);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+//        System.out.print(contactsArrayList);
 
         //Get shared preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int lastConvId = prefs.getInt("conversationId", -1);
-        if(lastConvId > -1) {
+        if (lastConvId > -1) {
             //if in conversation go there
 
             Intent intent = new Intent(this, MessengerActivity.class);
@@ -53,7 +71,7 @@ public class MessjiActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.listContacts);
         listView.setAdapter(adapter);
 
-        adapter.addAll(users);
+        adapter.addAll(contacts);
     }
 
     public void openMessage(View view) {

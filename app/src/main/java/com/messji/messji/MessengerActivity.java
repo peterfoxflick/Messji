@@ -14,15 +14,17 @@ import android.widget.ListView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.scaledrone.lib.Listener;
 import com.scaledrone.lib.Member;
 import com.scaledrone.lib.Room;
 import com.scaledrone.lib.RoomListener;
 import com.scaledrone.lib.Scaledrone;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class MessengerActivity extends AppCompatActivity {
+public class MessengerActivity extends AppCompatActivity implements Serializable {
     private EditText editText;
     // private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
@@ -34,6 +36,10 @@ public class MessengerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         convId = intent.getIntExtra("convId", -1);
+
+        Serializable userExtra = intent.getSerializableExtra("User");
+        User user = (User) new Gson().fromJson(userExtra.toString(), User.class);
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);

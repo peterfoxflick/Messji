@@ -61,7 +61,7 @@ public class MessjiActivity extends AppCompatActivity {
 
         adapter.addAll(contacts);
 
-        final Intent intent = new Intent(this, MessengerActivity.class);
+        final Intent messengerIntent = new Intent(this, MessengerActivity.class);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,8 +69,8 @@ public class MessjiActivity extends AppCompatActivity {
 
                 User userClicked =  (User) adapter.getItemAtPosition(position);
 
-                intent.putExtra("User", userClicked);
-                startActivity(intent);
+                messengerIntent.putExtra("User", new Gson().toJson(userClicked,User.class));
+                startActivity(messengerIntent);
             }
         });
     }

@@ -44,8 +44,18 @@ public class UsersAdapter extends ArrayAdapter<User> {
         TextView txtLastMessage = (TextView) convertView.findViewById(R.id.txtLastMessage);
         TextView txtDateLastMessage = (TextView) convertView.findViewById(R.id.txtDateLastMessage);
 
+        // I know these lines looks completely wrong! But I am thinking on the best way to do it.
+        int photoHex = R.drawable.ic_users_1;
+
+        if (user.getPhoto() == 2) {
+            photoHex = R.drawable.ic_users_2;
+        }
+
+        if (user.getPhoto() == 3) {
+            photoHex = R.drawable.ic_users_3;
+        }
         // Populate the data into the template view using the data object
-        imgPhoto.setImageResource(user.getPhoto());
+        imgPhoto.setImageResource(photoHex);
         txtName.setText(user.getFullName());
         txtLastMessage.setText("Last message goes here");
         txtDateLastMessage.setText(new SimpleDateFormat("HH:mm MM/dd/yy").format(new Date()));

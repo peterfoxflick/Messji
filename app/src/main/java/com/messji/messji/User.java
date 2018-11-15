@@ -58,6 +58,10 @@ class User implements Serializable {
 
     // Only store the data and use helper functions for UI convenience
     public String getFullName() {
+
+        if (firstName.isEmpty() && lastName.isEmpty())
+            return phoneNumber;
+        
         return firstName + " " + lastName;
     }
 }

@@ -26,21 +26,8 @@ public class MessjiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String contactsJson = null;
-        try {
-            InputStream is = getAssets().open("contacts.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            contactsJson = new String(buffer, "UTF-8");
 
-            contacts = new Gson().fromJson(contactsJson, User[].class);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-//        System.out.print(contactsArrayList);
+        getContacts();
 
         //Get shared preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -72,6 +59,22 @@ public class MessjiActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         adapter.addAll(contacts);
+    }
+
+    private void getContacts() {
+        String contactsJson = null;
+        try {
+            InputStream is = getAssets().open("contacts.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            contactsJson = new String(buffer, "UTF-8");
+
+            contacts = new Gson().fromJson(contactsJson, User[].class);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void openMessage(View view) {

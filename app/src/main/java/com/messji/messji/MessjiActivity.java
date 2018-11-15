@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -59,6 +60,19 @@ public class MessjiActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         adapter.addAll(contacts);
+
+        final Intent intent = new Intent(this, MessengerActivity.class);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+
+                User userClicked =  (User) adapter.getItemAtPosition(position);
+
+                intent.putExtra("User", userClicked);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getContacts() {
@@ -76,14 +90,7 @@ public class MessjiActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
     }
-
-    public void openMessage(View view) {
-        Intent intent = new Intent(this, MessengerActivity.class);
-        // this will not be User class, it will be a conversation
-        intent.putExtra("myUser", myUser);
-        startActivity(intent);
-    }
-
+    
     public void openSettings(View view) {
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("myUser", myUser);

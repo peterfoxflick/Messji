@@ -24,6 +24,13 @@ public class MessjiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        //Load in from database
+        Database db = new Database();
+
+
+
+
+
         //Get shared preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int lastConvId = prefs.getInt("conversationId", -1);

@@ -29,4 +29,7 @@ dependencies {
 
     implementation "com.scaledrone:scaledrone-java:0.3.0"
     // I added this for using the scaledrone module
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 }

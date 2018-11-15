@@ -1,7 +1,5 @@
 package com.messji.messji;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,18 +10,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.scaledrone.lib.Listener;
-import com.scaledrone.lib.Member;
-import com.scaledrone.lib.Room;
-import com.scaledrone.lib.RoomListener;
-import com.scaledrone.lib.Scaledrone;
 
 import java.io.Serializable;
-import java.util.Random;
 
 public class MessengerActivity extends AppCompatActivity implements Serializable {
     private EditText editText;

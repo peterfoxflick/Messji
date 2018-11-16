@@ -26,7 +26,7 @@ public class Database {
             // Read in messages from JSON file
             Gson gson = new Gson();
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader("messages"));
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("messages.json"));
                 messages = gson.fromJson(bufferedReader, messages.getClass());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -37,7 +37,7 @@ public class Database {
         public void save() {
             String mes = new Gson().toJson(messages);
             try {
-                Writer output = new BufferedWriter(new FileWriter("messages"));
+                Writer output = new BufferedWriter(new FileWriter("messages.json"));
                 output.write(mes);
                 output.close();
             } catch (IOException e) {
@@ -53,7 +53,7 @@ public class Database {
             // Read in messages from JSON file
             Gson gson = new Gson();
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader("conversations"));
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("conversations.json"));
                 conversations = gson.fromJson(bufferedReader, conversations.getClass());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -65,7 +65,7 @@ public class Database {
         public void save() {
             String mes = new Gson().toJson(conversations);
             try {
-                Writer output = new BufferedWriter(new FileWriter("conversations"));
+                Writer output = new BufferedWriter(new FileWriter("conversations.json"));
                 output.write(mes);
                 output.close();
             } catch (IOException e) {
@@ -83,7 +83,7 @@ public class Database {
             // Read in messages from JSON file
             Gson gson = new Gson();
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader("users"));
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("users.json"));
                 users = gson.fromJson(bufferedReader, users.getClass());
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -95,7 +95,7 @@ public class Database {
         public void save() {
             String mes = new Gson().toJson(users);
             try {
-                Writer output = new BufferedWriter(new FileWriter("users"));
+                Writer output = new BufferedWriter(new FileWriter("users.json"));
                 output.write(mes);
                 output.close();
             } catch (IOException e) {

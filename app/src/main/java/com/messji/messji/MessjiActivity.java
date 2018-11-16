@@ -28,16 +28,11 @@ public class MessjiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-<<<<<<< HEAD
         //Load in from database
         Database db = new Database();
 
 
-
-
-=======
         getContacts();
->>>>>>> master
 
         //Get shared preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

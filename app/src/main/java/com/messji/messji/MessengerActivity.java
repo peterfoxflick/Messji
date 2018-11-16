@@ -1,6 +1,5 @@
 package com.messji.messji;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,20 +10,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.scaledrone.lib.Listener;
-import com.scaledrone.lib.Member;
-import com.scaledrone.lib.Room;
-import com.scaledrone.lib.RoomListener;
-import com.scaledrone.lib.Scaledrone;
+import com.google.gson.Gson;
 
-import java.util.Random;
+import java.io.Serializable;
 
-public class MessengerActivity extends AppCompatActivity {
+public class MessengerActivity extends AppCompatActivity implements Serializable {
+
     private EditText editText;
-    // private Scaledrone scaledrone;
     private MessageAdapter messageAdapter;
     private ListView messagesView;
     private int convId;
@@ -34,6 +26,10 @@ public class MessengerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         convId = intent.getIntExtra("convId", -1);
+
+        Serializable userExtra = intent.getSerializableExtra("User");
+        User user = (User) new Gson().fromJson(userExtra.toString(), User.class);
+        this.setTitle(user.getFullName());
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);
@@ -53,7 +49,32 @@ public class MessengerActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(this);
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
+        };
+
+    public void sendMessage(View view) {
+        System.out.println("IN SEND MESSAGE FUNCTION");
+
+        /*try {*/
+        // if the clientID of the message sender is the same as our's it was sent by us
+        boolean belongsToCurrentUser = true;//Just for now
+        // if it was instead an object we could use a similar pattern to data parsing
+        final Message message = new Message(editText.getText().toString(), 0, 0, belongsToCurrentUser);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                messageAdapter.add(message);
+                // scroll the ListView to the last added element
+                messagesView.setSelection(messagesView.getCount() - 1);
+            }
+        });
+
+        // Clear the text field after sending the message
+        editText.getText().clear();
     }
+
+            /*catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }*/
 
     public void onClose(){
 
@@ -63,12 +84,5 @@ public class MessengerActivity extends AppCompatActivity {
         editor.putInt("convId", convId );
         editor.commit();
     }
-
-
-
-
-    public void sendMessage(View view) {
-        System.out.println("IN SENDMESSAGE FUNCTION");
-
-    }
 }
+

@@ -19,8 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MessengerActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity
+            android:name=".MessengerActivity"
+            android:parentActivityName="com.messji.messji.MessjiActivity" />
+        <activity android:name=".ProfileActivity"
+            android:parentActivityName=".MessjiActivity"></activity>
     </application>
 
 </manifest>
+

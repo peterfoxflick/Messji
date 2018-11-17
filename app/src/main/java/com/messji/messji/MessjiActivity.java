@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -19,18 +20,19 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MessjiActivity extends AppCompatActivity {
 
     User myUser = new User("Douglas", "C. Hanson", "+18017457869", R.drawable.avitar);
     User[] contacts = null;
+    Database db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //Load in from database
-        Database db = new Database();
-
+        db = new Database();
 
         getContacts();
 
@@ -54,7 +56,7 @@ public class MessjiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messji);
 
         // Construct the data source
-        ArrayList<User> arrayOfUsers = new ArrayList<User>();
+        ArrayList<User> arrayOfUsers = new ArrayList<User>( Database.Users.users );
 
         // Create the adapter to convert the array to views
         UsersAdapter adapter = new UsersAdapter(this, arrayOfUsers);

@@ -26,13 +26,11 @@ public class MessjiActivity extends AppCompatActivity {
 
     User myUser = new User("Douglas", "C. Hanson", "+18017457869", R.drawable.avitar);
     User[] contacts = null;
-    Database db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         //Load in from database
-        db = new Database();
 
         getContacts();
 
@@ -56,7 +54,9 @@ public class MessjiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messji);
 
         // Construct the data source
-        ArrayList<User> arrayOfUsers = new ArrayList<User>( Database.Users.users );
+        Database.loadUsers();
+
+        ArrayList<User> arrayOfUsers = new ArrayList<>(Arrays.asList(Database.getUsers())) ;
 
         // Create the adapter to convert the array to views
         UsersAdapter adapter = new UsersAdapter(this, arrayOfUsers);

@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class UsersAdapter extends ArrayAdapter<User> {
-    public UsersAdapter(Context context, ArrayList<User> users) {
+    public UsersAdapter(Context context, List<User> users) {
         super(context, 0, users);
     }
 

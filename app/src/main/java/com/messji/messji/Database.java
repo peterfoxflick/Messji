@@ -2,9 +2,11 @@ package com.messji.messji;
 
 
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,14 +14,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public final class Database {
     private static List messages;
     private static List conversations;
-    private static User[] users;
+    private static List users;
 
     public static List getMessages() {
         return messages;
@@ -29,7 +33,7 @@ public final class Database {
         return conversations;
     }
 
-    public static User[] getUsers() {
+    public static List getUsers() {
         return users;
     }
 
@@ -60,16 +64,11 @@ public final class Database {
 
     }
 
-    public static void loadUsers() {
+    public static void loadUsers(Context context) {
         Gson gson = new Gson();
-
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("contacts.json"));
-            users = gson.fromJson(bufferedReader, users.getClass());
-            Log.i("Users: ", Arrays.toString(users));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
+        users = gson.fromJson(bufferedReader, new TypeToken<List<User>>(){}.getType());
+        Log.i("Users: ", users.toString());
     }
 
 

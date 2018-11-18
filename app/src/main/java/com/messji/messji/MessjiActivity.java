@@ -54,18 +54,15 @@ public class MessjiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messji);
 
         // Construct the data source
-        Database.loadUsers();
-
-        ArrayList<User> arrayOfUsers = new ArrayList<>(Arrays.asList(Database.getUsers())) ;
+        Database.loadUsers(this);
 
         // Create the adapter to convert the array to views
-        UsersAdapter adapter = new UsersAdapter(this, arrayOfUsers);
+        UsersAdapter adapter = new UsersAdapter(this, Database.getUsers());
 
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.listContacts);
         listView.setAdapter(adapter);
 
-        adapter.addAll(contacts);
 
         final Intent messengerIntent = new Intent(this, MessengerActivity.class);
 

@@ -17,8 +17,9 @@ public class MessageAdapter extends BaseAdapter {
     List<Message> messages = new ArrayList<Message>();
     Context context;
 
-    public MessageAdapter(Context context) {
+    public MessageAdapter(Context context, List<Message> messages) {
         this.context = context;
+        this.messages = messages;
     }
 
     public void add(Message message) {
@@ -60,7 +61,7 @@ public class MessageAdapter extends BaseAdapter {
             convertView.setTag(holder);
 
             //holder.name.setText(message.getData().getFullName());   //changing this since we are using id's instead of data
-            holder.name.setText(message.getMessage_id()); //This will replace the above line of code - need to add a getName from suer class
+            holder.name.setText(Integer.toString(message.getMessage_id())); //This will replace the above line of code - need to add a getName from suer class
             holder.messageBody.setText(message.getText());
             GradientDrawable drawable = (GradientDrawable) holder.avatar.getBackground();
         }

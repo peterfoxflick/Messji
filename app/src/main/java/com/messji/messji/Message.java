@@ -6,7 +6,7 @@ import java.util.Date;
 public class Message {
     private int message_id;   // id associated with users message
     private int user_id;      //id associated with the actual user
-    private Date timestamp;
+    private String timestamp;
     private String text; // message body
 
     //private User data; // data of the user that sent this message
@@ -17,16 +17,16 @@ public class Message {
     public Message(String text, int message_id, int user_id, boolean belongsToCurrentUser) {
         this.text = text;
         this.belongsToCurrentUser = belongsToCurrentUser;
-        this.timestamp = new Date();
+        this.timestamp = "Timestamp";
         this.message_id = message_id;
         this.user_id = user_id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return timestamp;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.timestamp = date;
     }
 

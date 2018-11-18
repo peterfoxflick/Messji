@@ -57,6 +57,7 @@ public class MessjiActivity extends AppCompatActivity {
         Database.loadUsers(this);
 
         // Create the adapter to convert the array to views
+
         UsersAdapter adapter = new UsersAdapter(this, Database.getUsers());
 
         // Attach the adapter to a ListView
@@ -97,6 +98,12 @@ public class MessjiActivity extends AppCompatActivity {
     public void openSettings(View view) {
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("myUser", myUser);
+        startActivity(intent);
+    }
+
+    public void openMessenger(View view){
+        Intent intent = new Intent(this, MessengerActivity.class);
+        intent.putExtra("User", myUser);
         startActivity(intent);
     }
 }

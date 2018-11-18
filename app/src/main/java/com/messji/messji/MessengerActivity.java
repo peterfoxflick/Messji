@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessengerActivity extends AppCompatActivity implements Serializable {
 
@@ -27,9 +30,9 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         Intent intent = getIntent();
         convId = intent.getIntExtra("convId", -1);
 
-        Serializable userExtra = intent.getSerializableExtra("User");
-        User user = (User) new Gson().fromJson(userExtra.toString(), User.class);
-        this.setTitle(user.getFullName());
+       // Serializable userExtra = intent.getSerializableExtra("User");
+       // User user = (User) new Gson().fromJson(userExtra.toString(), User.class);
+        this.setTitle("User Name here");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);
@@ -39,17 +42,28 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         //Use conv ID to populate messages here
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if(prefs.getInt("lastConvId", -1) == convId){
-            String draft = prefs.getString("draftText", "");
-            editText.setText(draft);
-        }
+    //    if(prefs.getInt("lastConvId", -1) == convId){
+    //        String draft = prefs.getString("draftText", "");
+    //        editText.setText(draft);
+    //    }
 
-        messageAdapter = new MessageAdapter(this);
+
+        // Construct the data source
+        Database.loadMessages(this);
+
+
+       // List<Message> msgs = new ArrayList<Message>();
+
+        messageAdapter = new MessageAdapter(this, Database.getMessages() );
         messagesView = (ListView) findViewById(R.id.messages_view);
         messagesView.setAdapter(messageAdapter);
-        };
+
+
+
+
+    };
 
     public void sendMessage(View view) {
         System.out.println("IN SEND MESSAGE FUNCTION");

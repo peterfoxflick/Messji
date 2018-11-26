@@ -87,5 +87,17 @@ public final class Database {
 //        Log.i("Users: ", users.toString());
     }
 
+    // Class to write messages back into the Database class?
+    public static void addMessage(Message message) {
+        try {
+            Writer output = new BufferedWriter(new FileWriter("messages.json"));
+            output.write(message.getText());
+            output.close();
+            messages.add(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

@@ -9,7 +9,12 @@ import android.widget.TextView;
 /**
  * The base class for the message view holders
  */
-class MessageViewHolder2 extends RecyclerView.ViewHolder {
+class MessageViewHolder extends RecyclerView.ViewHolder {
+
+    // OG code
+    public View avatar;
+    public TextView name;
+    public TextView messageBody;
 
     // Declare the UI elements for the view holder
     LinearLayout mBubbleBackground;
@@ -17,7 +22,7 @@ class MessageViewHolder2 extends RecyclerView.ViewHolder {
     BubbleType mBubbleType;
 
     // When instantiated, keep a reference to the layout IDs and set the bubble type as unknown
-    MessageViewHolder2(@NonNull View view) {
+    MessageViewHolder(@NonNull View view) {
         super(view);
         mBubbleBackground = view.findViewById(R.id.bubble_background);
         mBubbleContent = view.findViewById(R.id.bubble_content);

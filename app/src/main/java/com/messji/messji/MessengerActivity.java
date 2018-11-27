@@ -48,9 +48,9 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         // if negative 1 go back to home
 
         //Use conv ID to populate messages here
-        Database.loadConversations(this);
-        JSONArray conversations = new JSONArray(Database.getConversations());
-        for (int i = 0; i < conversations.length(); i++) {
+        //Database.loadConversations(this); TODO - this is causing a crash
+        //JSONArray conversations = new JSONArray(Database.getConversations());
+        /*for (int i = 0; i < conversations.length(); i++) {
             try {
                 if ((conversations.getInt(0)) == convId) {   //Didn't get this to work quite yet, id is still coming in as "-1"
                     //load up these messages since they are a match
@@ -60,7 +60,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 

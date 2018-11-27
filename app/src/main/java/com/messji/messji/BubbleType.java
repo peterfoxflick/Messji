@@ -1,4 +1,10 @@
 package com.messji.messji;
 
-public class BubbleType {
+/**
+ * Describes the different types of bubbles depending on who sent the message
+ */
+public enum BubbleType {
+    UNKNOWN,
+    INCOMING,
+    OUTGOING
 }

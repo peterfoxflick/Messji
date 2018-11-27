@@ -57,7 +57,8 @@ public class UsersAdapter extends ArrayAdapter<User> {
         // Populate the data into the template view using the data object
         imgPhoto.setImageResource(photoHex);
         txtName.setText(user.getFullName());
-        txtLastMessage.setText("Last message goes here");  //TODO - here change the message to show up in UI
+        txtLastMessage.setText("Last message goes here");
+        //txtLastMessage.setText("Last message goes here");  //TODO - here change the message to show up in UI
         txtDateLastMessage.setText(new SimpleDateFormat("HH:mm MM/dd/yy").format(new Date()));
 
         // Return the completed view to render on screen

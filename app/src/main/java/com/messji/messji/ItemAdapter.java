@@ -2,6 +2,7 @@ package com.messji.messji;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,7 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     // For when the view holder is bound to a new position
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, int position) {
+        Log.d("On Message View", "Youre in");
 
         // Get the message at the position in the list and set the text to the view holder
         String message = mMessages.get(position).getText();

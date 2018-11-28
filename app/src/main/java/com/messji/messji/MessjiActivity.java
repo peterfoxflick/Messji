@@ -32,8 +32,16 @@ public class MessjiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         //Load in from database
+        Database.loadConversations(this);
 
-        getContacts();
+
+
+
+
+
+
+
+
 
         //Get shared preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -55,46 +63,34 @@ public class MessjiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messji);
 
         // Construct the data source
-        Database.loadUsers(this);
+        Database.loadConversations(this);
+
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ConversationFragment()).commit();
+
 
         // Create the adapter to convert the array to views
 
-        UsersAdapter adapter = new UsersAdapter(this, Database.getUsers());
+       // UsersAdapter adapter = new UsersAdapter(this, Database.getUsers());
 
         // Attach the adapter to a ListView
-        ListView listView = (ListView) findViewById(R.id.listContacts);
-        listView.setAdapter(adapter);
+       // ListView listView = (ListView) findViewById(R.id.listContacts);
+      //  listView.setAdapter(adapter);
 
 
         final Intent messengerIntent = new Intent(this, MessengerActivity.class);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+      //  listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      //      @Override
+       //     public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
 
-                User userClicked =  (User) adapter.getItemAtPosition(position);
+      //          User userClicked =  (User) adapter.getItemAtPosition(position);
 
-                messengerIntent.putExtra("User", new Gson().toJson(userClicked,User.class));
-                startActivity(messengerIntent);
-            }
-        });
+      //          messengerIntent.putExtra("User", new Gson().toJson(userClicked,User.class));
+      //          startActivity(messengerIntent);
+      //      }
+      //  });
     }
 
-    private void getContacts() {
-        String contactsJson = null;
-        try {
-            InputStream is = getAssets().open("contacts.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            contactsJson = new String(buffer, "UTF-8");
-
-            contacts = new Gson().fromJson(contactsJson, User[].class);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
     
     public void openSettings(View view) {
         Intent intent = new Intent(this, ProfileActivity.class);

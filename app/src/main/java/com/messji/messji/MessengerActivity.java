@@ -82,8 +82,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ItemFragment()).commit();
 
-
-
     };
 
     public void sendMessage(View view) {

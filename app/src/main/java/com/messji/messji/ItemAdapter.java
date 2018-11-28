@@ -16,10 +16,10 @@ import java.util.Random;
 public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     // Declare the list of messages that the adapter will pull from
-    private List<String> mMessages;
+    private List<Message> mMessages;
 
     // Store the passed in messages so it can be used in the methods below
-    ItemAdapter(List<String> messages) {
+    ItemAdapter(List<Message> messages) {
         mMessages = messages;
     }
 
@@ -45,7 +45,7 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, int position) {
 
         // Get the message at the position in the list and set the text to the view holder
-        String message = mMessages.get(position);
+        String message = mMessages.get(position).getText();
         messageViewHolder.mBubbleContent.setText(
                 new StringBuilder().append("(").append(position).append(") ").append(message)
         );

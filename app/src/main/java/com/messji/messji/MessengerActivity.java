@@ -76,10 +76,11 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
        // List<Message> msgs = new ArrayList<Message>();
 
-        messageAdapter = new MessageAdapter(this, Database.getMessages() );
-        messagesView = (ListView) findViewById(R.id.messages_view);
-        messagesView.setAdapter(messageAdapter);
+      //  messageAdapter = new MessageAdapter(this, Database.getMessages() );
+      //  messagesView = (ListView) findViewById(R.id.messages_view);
+      //  messagesView.setAdapter(messageAdapter);
 
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ItemFragment()).commit();
 
 
 

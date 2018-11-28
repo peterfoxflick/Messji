@@ -79,12 +79,7 @@ public final class Database {
             e.printStackTrace();
         }
 
-        //This is an atempt to write, it dosn't work
-//        mes = new Gson().toJson(users);
-//        Gson gson = new Gson();
-//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
-//        users = gson.fromJson(bufferedReader, new TypeToken<List<User>>(){}.getType());
-//        Log.i("Users: ", users.toString());
+
     }
 
     // Class to write messages back into the Database class?

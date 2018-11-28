@@ -1,5 +1,7 @@
 package com.messji.messji;
 
+import android.content.Context;
+
 import java.util.List;
 
 public class Conversation {
@@ -44,5 +46,6 @@ public class Conversation {
 
         return null;
     }
+
 
 }

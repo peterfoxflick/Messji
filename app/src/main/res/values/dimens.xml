@@ -1,3 +1,13 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- FRAGMENT -->
+    <dimen name="layout_marginStartEnd">16dp</dimen>
+
+    <!-- ROW ITEM -->
+    <dimen name="item_textMargin">8dp</dimen>
+    <dimen name="item_textPadding">10dp</dimen>
+
+    <!-- BUBBLES -->
+    <dimen name="message_cornerRadius">12dp</dimen>
 </resources>

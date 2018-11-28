@@ -2,7 +2,6 @@ package com.messji.messji;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +43,7 @@ public class MessageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
-        MessageViewHolder holder = new MessageViewHolder();
+        MessageViewHolder holder = new MessageViewHolder(viewGroup); //Added viewGroup parameter for recyclerView
         LayoutInflater messageInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         Message message = messages.get(i);
 
@@ -70,8 +69,3 @@ public class MessageAdapter extends BaseAdapter {
     }
 }
 
-class MessageViewHolder {
-    public View avatar;
-    public TextView name;
-    public TextView messageBody;
-}

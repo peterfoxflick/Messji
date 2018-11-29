@@ -14,24 +14,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConversationFragment extends Fragment {
-        // For when the view is first created
-        @Nullable
-        @Override
-        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    // For when the view is first created
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-            // Initialize a large list of messages by combining the sample strings and then shuffling
-            List<Conversation> mConversation = new ArrayList<>();
-            mConversation = Database.getConversations();
+        // Initialize a large list of messages by combining the sample strings and then shuffling
+        List<Conversation> mConversation = new ArrayList<>();
+        mConversation = Database.getConversations();
 
-            // Initialize the view for the fragment and set the RecyclerView layout manager and adapter
-            View view = inflater.inflate(R.layout.list_contacts, container, false);
-            if (view instanceof RecyclerView) {
-                ((RecyclerView) view).setLayoutManager(new LinearLayoutManager(requireContext()));
-                ((RecyclerView) view).setAdapter(new ConversationAdapter(mConversation));
-            }
-
-            // Return the view back to the caller
-            return view;
+        // Initialize the view for the fragment and set the RecyclerView layout manager and adapter
+        View view = inflater.inflate(R.layout.list_conversations, container, false);
+        if (view instanceof RecyclerView) {
+            ((RecyclerView) view).setLayoutManager(new LinearLayoutManager(requireContext()));
+            ((RecyclerView) view).setAdapter(new ConversationAdapter(mConversation));
         }
+
+        // Return the view back to the caller
+        return view;
     }
+}
 

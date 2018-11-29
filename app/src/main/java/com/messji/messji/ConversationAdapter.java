@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import java.util.List;
 import java.util.Random;
 
-public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHolder>  {
+public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHolder> {
     private List<Conversation> mConversation;
 
     // Store the passed in messages so it can be used in the methods below
@@ -26,7 +26,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHo
 
         // Inflate the item layout when the view holder is created
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_contacts, viewGroup, false);
+                .inflate(R.layout.conversation_item, viewGroup, false);
         return new ConversationViewHolder(view);
     }
 
@@ -36,12 +36,15 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHo
         Log.d("On Bind View", "Youre in");
 
         // Get the message at the position in the list and set the text to the view holder
-        String title = mConversation.get(position).getTitle();
+        //String title = mConversation.get(position).getTitle();
+        System.out.println("The MessageID name is: " + mConversation.get(position).id);
 
-        conversationViewHolder.txtName.setText(title);
+        conversationViewHolder.mName.setText("Julius Caesar");
+        conversationViewHolder.mLastMessage.setText(mConversation.get(position).title);
+        conversationViewHolder.mTimeStamp.setText("4:53 PM 11/28/2018");
+        conversationViewHolder.mAvatar.setImageResource(R.drawable.avitar);
+
         Log.d("On Bind View", "YOu set the text to Howdy Partner");
-
-
     }
 
     // For getting the number of items in the adapter

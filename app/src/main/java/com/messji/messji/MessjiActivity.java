@@ -31,12 +31,6 @@ public class MessjiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FloatingActionButton myFab = (FloatingActionButton) this.findViewById(R.id.floatingButtonNewMessage);
-        myFab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                
-            }
-        });
 
         //Load in from database
         Database.loadConversations(this);
@@ -76,6 +70,11 @@ public class MessjiActivity extends AppCompatActivity {
     public void openMessenger(View view){
         Intent intent = new Intent(this, MessengerActivity.class);
         intent.putExtra("User", myUser);
+        startActivity(intent);
+    }
+
+    public void openContacts(View view) {
+        Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }
 }

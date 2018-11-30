@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,12 @@ public class MessjiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FloatingActionButton myFab = (FloatingActionButton) this.findViewById(R.id.floatingButtonNewMessage);
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                
+            }
+        });
 
         //Load in from database
         Database.loadConversations(this);

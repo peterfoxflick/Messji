@@ -3,6 +3,7 @@ package com.messji.messji;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -60,10 +61,19 @@ public final class Database {
      * @param context Nesccessary to find the file. From an activity just pass in "this"
      */
     public static void loadUsers(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
-        users = gson.fromJson(bufferedReader, new TypeToken<List<User>>(){}.getType());
-        Log.i("Users: ", users.toString());
+
+        if(sharedPreferences.contains("Users")){
+            String data = sharedPreferences.getString("Users", "");
+            users = gson.fromJson(data, new TypeToken<List<User>>(){}.getType() );
+        } else {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
+            users = gson.fromJson(bufferedReader, new TypeToken<List<User>>(){}.getType());
+        }
+
+        Log.i("Loaded Users: ", users != null ? users.toString() : null);
+
     }
 
     /**
@@ -72,10 +82,19 @@ public final class Database {
      * @param context Nesccessary to find the file. From an activity just pass in "this"
      */
     public static void loadMessages(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.messages)));
-        messages = gson.fromJson(bufferedReader, new TypeToken<List<Message>>(){}.getType());
-        Log.i("Messages: ", messages.toString());
+
+        if(sharedPreferences.contains("Messages")){
+            String data = sharedPreferences.getString("Messages", "");
+            messages = gson.fromJson(data, new TypeToken<List<Message>>(){}.getType() );
+        } else {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.messages)));
+            messages = gson.fromJson(bufferedReader, new TypeToken<List<Message>>(){}.getType());
+        }
+
+        Log.i("Loaded Messages: ", messages != null ? messages.toString() : null);
+
     }
 
     /**
@@ -84,34 +103,42 @@ public final class Database {
      * @param context Nesccessary to find the file. From an activity just pass in "this"
      */
     public static void loadConversations(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.conversations)));
-        conversations = gson.fromJson(bufferedReader, new TypeToken<List<Conversation>>(){}.getType());
-        Log.i("Conversations: ", conversations.toString());
+
+        if(sharedPreferences.contains("Conversations")){
+            String data = sharedPreferences.getString("Conversations", "");
+            conversations = gson.fromJson(data, new TypeToken<List<Conversation>>(){}.getType() );
+        } else {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
+            conversations = gson.fromJson(bufferedReader, new TypeToken<List<Conversation>>(){}.getType());
+        }
+
+        Log.i("Loaded Conversations: ", conversations != null ? conversations.toString() : null);
+
     }
 
     /**
      * Saves the new information added to the database so it can be used next time the app is launched
      */
-    public void save() {
-        String mes = new Gson().toJson(messages);
-        try {
-            Writer output = new BufferedWriter(new FileWriter("messages.json"));
-            output.write(mes);
-            output.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void save(Context context) {
 
-        mes = new Gson().toJson(conversations);
-        try {
-            Writer output = new BufferedWriter(new FileWriter("conversations.json"));
-            output.write(mes);
-            output.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        //First save messages
+        String data = new Gson().toJson(messages);
+        editor.putString("Messages", data);
+
+        //Second save conversations
+        data = new Gson().toJson(conversations);
+        editor.putString("Conversations", data);
+
+        //Third save users
+        data = new Gson().toJson(users);
+        editor.putString("Users", data);
+
+        editor.apply();
 
     }
 
@@ -122,14 +149,7 @@ public final class Database {
      * @param message The message to save
      */
     public static void addMessage(Message message) {
-        try {
-            Writer output = new BufferedWriter(new FileWriter("messages.json"));
-            output.write(message.getText());
-            output.close();
-            messages.add(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        messages.add(message);
     }
 
 

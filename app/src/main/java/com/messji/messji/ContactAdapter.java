@@ -1,5 +1,6 @@
 package com.messji.messji;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -7,11 +8,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> implements Serializable {
     private List<User> mContact;
 
     // Store the passed in messages so it can be used in the methods below
@@ -32,7 +37,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
 
     // For when the view holder is bound to a new position
     @Override
-    public void onBindViewHolder(@NonNull ContactViewHolder contactViewHolder, int position) {
+    public void onBindViewHolder(@NonNull ContactViewHolder contactViewHolder, final int position) {
         contactViewHolder.cFullName.setText(mContact.get(position).getFullName());
         contactViewHolder.cPhoneNumber.setText(mContact.get(position).getPhoneNumber());
 
@@ -45,6 +50,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> {
             hexPhoto = R.drawable.ic_users_3;
 
         contactViewHolder.cAvatar.setImageResource(hexPhoto);
+
+        contactViewHolder.cBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(v.getContext().toString(), "Getting ready to open a new conversation. Index: " + position);
+
+                Intent intent = new Intent(v.getContext(), MessengerActivity.class);
+
+                User user = mContact.get(position);
+                intent.putExtra("User", new Gson().toJson(user, User.class));
+
+                v.getContext().startActivity(intent);
+
+                Log.i(v.getContext().toString(), "Activity opened. Intent: " + intent.toString());
+            }
+        });
     }
 
     // For getting the number of items in the adapter

@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:paddingTop="12dp"
         android:orientation="vertical">
 
         <TextView
@@ -35,8 +36,8 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-        <View
-            style="@style/Divider"
-            android:layout_marginTop="5dp" />
+        <!--<View-->
+            <!--style="@style/Divider"-->
+            <!--android:layout_marginTop="5dp" />-->
     </LinearLayout>
 </LinearLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,6 +70,11 @@ public class MessjiActivity extends AppCompatActivity {
     public void openMessenger(View view){
         Intent intent = new Intent(this, MessengerActivity.class);
         intent.putExtra("User", myUser);
+        startActivity(intent);
+    }
+
+    public void openContacts(View view) {
+        Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }
 }

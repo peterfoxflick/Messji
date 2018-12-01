@@ -21,10 +21,14 @@
         </activity>
         <activity
             android:name=".MessengerActivity"
-            android:parentActivityName="com.messji.messji.MessjiActivity" />
-        <activity android:name=".ProfileActivity"
-            android:parentActivityName=".MessjiActivity"></activity>
+            android:parentActivityName=".MessjiActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MessjiActivity" />
+        <activity
+            android:label="@string/activity_title_contacts"
+            android:name=".ContactsActivity"
+            android:parentActivityName=".MessjiActivity" />
     </application>
 
 </manifest>
-

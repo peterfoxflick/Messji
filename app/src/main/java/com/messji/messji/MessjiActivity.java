@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,15 +35,6 @@ public class MessjiActivity extends AppCompatActivity {
         //Load in from database
         Database.loadConversations(this);
 
-
-
-
-
-
-
-
-
-
         //Get shared preferences
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         int lastConvId = prefs.getInt("conversationId", -1);
@@ -65,30 +57,7 @@ public class MessjiActivity extends AppCompatActivity {
         // Construct the data source
         Database.loadConversations(this);
 
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ConversationFragment()).commit();
-
-
-        // Create the adapter to convert the array to views
-
-       // UsersAdapter adapter = new UsersAdapter(this, Database.getUsers());
-
-        // Attach the adapter to a ListView
-       // ListView listView = (ListView) findViewById(R.id.listContacts);
-      //  listView.setAdapter(adapter);
-
-
-        final Intent messengerIntent = new Intent(this, MessengerActivity.class);
-
-      //  listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      //      @Override
-       //     public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
-
-      //          User userClicked =  (User) adapter.getItemAtPosition(position);
-
-      //          messengerIntent.putExtra("User", new Gson().toJson(userClicked,User.class));
-      //          startActivity(messengerIntent);
-      //      }
-      //  });
+        getSupportFragmentManager().beginTransaction().replace(R.id.heregoesthething , new ConversationFragment()).commit();
     }
 
     
@@ -101,6 +70,11 @@ public class MessjiActivity extends AppCompatActivity {
     public void openMessenger(View view){
         Intent intent = new Intent(this, MessengerActivity.class);
         intent.putExtra("User", myUser);
+        startActivity(intent);
+    }
+
+    public void openContacts(View view) {
+        Intent intent = new Intent(this, ContactsActivity.class);
         startActivity(intent);
     }
 }

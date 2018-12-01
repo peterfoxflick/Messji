@@ -13,21 +13,21 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConversationFragment extends Fragment {
+public class ContactFragment extends Fragment {
     // For when the view is first created
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // Initialize a large list of messages by combining the sample strings and then shuffling
-        List<Conversation> mConversation = new ArrayList<>();
-        mConversation = Database.getConversations();
+        List<User> mUsers = new ArrayList<>();
+        mUsers = Database.getUsers();
 
         // Initialize the view for the fragment and set the RecyclerView layout manager and adapter
         View view = inflater.inflate(R.layout.list_conversations, container, false);
         if (view instanceof RecyclerView) {
             ((RecyclerView) view).setLayoutManager(new LinearLayoutManager(requireContext()));
-            ((RecyclerView) view).setAdapter(new ConversationAdapter(mConversation));
+            ((RecyclerView) view).setAdapter(new ContactAdapter(mUsers));
         }
 
         // Return the view back to the caller

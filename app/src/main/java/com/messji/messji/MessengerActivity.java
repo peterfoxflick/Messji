@@ -87,21 +87,32 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     public void sendMessage(View view) {
         Log.v("sendMessage","IN SEND MESSAGE FUNCTION");
 
+        Database.loadDatabase(this);
+        Database db = new Database();
+
         /*try {*/
         // if the clientID of the message sender is the same as our's it was sent by us
         boolean belongsToCurrentUser = true;//Just for now
 
         // if it was instead an object we could use a similar pattern to data parsing
         final Message message = new Message(editText.getText().toString(), convId, 0, belongsToCurrentUser);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                messageAdapter.add(message);
-                // scroll the ListView to the last added element
-                messagesView.setSelection(messagesView.getCount() - 1);
-                Database.addMessage(message);     //add the message to the database - this is very primitive right now
-            }
-        });
+
+
+        if(db.isBelowLimit(message.getText().length()) ) {
+
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    messageAdapter.add(message);
+                    // scroll the ListView to the last added element
+                    messagesView.setSelection(messagesView.getCount() - 1);
+                    Database.addMessage(message);     //add the message to the database - this is very primitive right now
+                }
+            });
+        } else {
+            editText.setText("Opps: that to long, you'll exceed your limit");
+        }
 
         // Clear the text field after sending the message
         editText.getText().clear();

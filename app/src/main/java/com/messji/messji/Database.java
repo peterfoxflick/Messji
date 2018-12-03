@@ -122,14 +122,7 @@ public final class Database {
      * @param message The message to save
      */
     public static void addMessage(Message message) {
-        try {
-            Writer output = new BufferedWriter(new FileWriter("messages.json"));
-            output.write(message.getText());
-            output.close();
-            messages.add(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        messages.add(message);
     }
 
 

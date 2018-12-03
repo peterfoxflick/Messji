@@ -113,7 +113,9 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                 // messageAdapter.add(message);
                 // scroll the ListView to the last added element
                 // messagesView.setSelection(messagesView.getCount() - 1);
-                Database.addMessage(message);     //add the message to the database - this is very primitive right now
+                Database.addMessage(message);
+
+
             }
         });
 

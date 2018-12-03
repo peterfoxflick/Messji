@@ -28,6 +28,7 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     @NonNull
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        Log.v("MessageViewHolder:", "In MessageViewHoler");
 
         // Inflate the item layout when the view holder is created
         View view = LayoutInflater.from(viewGroup.getContext())
@@ -47,7 +48,8 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         Log.d("On Message View", "Youre in");
 
         // Get the message at the position in the list and set the text to the view holder
-        String message = mMessages.get(position).getText();
+        String message = mMessages.get(position ).getText();
+        Log.v("onBindViewHolder:", "message is: " + message);
         messageViewHolder.mBubbleContent.setText(
                 new StringBuilder().append("(").append(position).append(") ").append(message)
         );

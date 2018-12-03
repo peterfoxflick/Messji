@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,8 +29,8 @@ import java.util.List;
 public class MessengerActivity extends AppCompatActivity implements Serializable {
 
     private EditText editText;
-    private MessageAdapter messageAdapter;
-    private ListView messagesView;
+    private ItemAdapter messageAdapter;
+    private RecyclerView messagesView;
     private int convId;
 
     @Override
@@ -76,11 +78,17 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
        // List<Message> msgs = new ArrayList<Message>();
 
-      //  messageAdapter = new MessageAdapter(this, Database.getMessages() );
-      //  messagesView = (ListView) findViewById(R.id.messages_view);
-      //  messagesView.setAdapter(messageAdapter);
+        messageAdapter = new ItemAdapter(Database.getMessages());
+        messagesView = findViewById(R.id.messages_view);
+        messagesView.setLayoutManager(new LinearLayoutManager(this));
+        messagesView.setAdapter(messageAdapter);
 
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ItemFragment()).commit();
+        /*
+            NOTE: The line below replaces the whole content of your UI with the ItemFragment() only
+            This was causing the issue where you couldn't tap on the EditText (it didn't exist anymore)
+            Instead, I included the RecyclerView in the activity layout and configure it above
+        */
+        //getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ItemFragment()).commit();
 
     };
 
@@ -96,23 +104,22 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         // if it was instead an object we could use a similar pattern to data parsing
         final Message message = new Message(editText.getText().toString(), convId, 0, belongsToCurrentUser);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                /*
+                    TODO: You won't be able to directly add messages to a RecyclerView like you can a ListView
+                    After adding your message to the database, you let the adapter know to go fetch the new data
+                    Since you're adding a new message, I recommend looking at the documentation for notifyItemInserted()
+                 */
 
+                // messageAdapter.add(message);
+                // scroll the ListView to the last added element
+                // messagesView.setSelection(messagesView.getCount() - 1);
+                Database.addMessage(message);     //add the message to the database - this is very primitive right now
+            }
+        });
 
-        if(db.isBelowLimit(message.getText().length()) ) {
-
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    messageAdapter.add(message);
-                    // scroll the ListView to the last added element
-                    messagesView.setSelection(messagesView.getCount() - 1);
-                    Database.addMessage(message);     //add the message to the database - this is very primitive right now
-                }
-            });
-        } else {
-            editText.setText("Opps: that to long, you'll exceed your limit");
-        }
 
         // Clear the text field after sending the message
         editText.getText().clear();

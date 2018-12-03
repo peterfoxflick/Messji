@@ -40,7 +40,6 @@ public final class Database {
         return charCount.getTodayCount();
     }
 
-
     /**
      * Returns a list of all messages
      */
@@ -179,10 +178,16 @@ public final class Database {
     // More of the interaction part
     /**
      * Adds a message to the database so it can be stored for future use.
+     * Note: Needs to still add to conversation list
      * @param message The message to save
      */
-    public static void addMessage(Message message) {
+    public void addMessage(Message message, Integer conversationId) {
+        Conversation conversation = getConversationFromId(conversationId);
+        int id = messages.size();
+        message.setMessage_id(id);
+
         messages.add(message);
+
     }
 
     /**

@@ -95,7 +95,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         boolean belongsToCurrentUser = true;//Just for now
 
         // if it was instead an object we could use a similar pattern to data parsing
-        final Message message = new Message(editText.getText().toString(), convId, 0, belongsToCurrentUser);
+        final Message message = new Message(editText.getText().toString(), 1);               //1 needs to be replaced with the user id
 
 
         if(db.isBelowLimit(message.getText().length()) ) {
@@ -107,7 +107,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                     messageAdapter.add(message);
                     // scroll the ListView to the last added element
                     messagesView.setSelection(messagesView.getCount() - 1);
-                    Database.addMessage(message);     //add the message to the database - this is very primitive right now
+                    Database db = new Database();
+                    db.addMessage(message, convId);
                 }
             });
         } else {

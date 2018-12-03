@@ -48,7 +48,7 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         Log.d("On Message View", "Youre in");
 
         // Get the message at the position in the list and set the text to the view holder
-        String message = mMessages.get(position ).getText();
+        String message = mMessages.get(position).getText();
         Log.v("onBindViewHolder:", "message is: " + message);
         messageViewHolder.mBubbleContent.setText(
                 new StringBuilder().append("(").append(position).append(") ").append(message)

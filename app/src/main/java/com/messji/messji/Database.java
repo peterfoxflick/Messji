@@ -171,10 +171,6 @@ public final class Database {
 
     }
 
-
-
-
-
     // More of the interaction part
     /**
      * Adds a message to the database so it can be stored for future use.
@@ -203,7 +199,6 @@ public final class Database {
         }
         return null;
     }
-
 
     /**
      * retrieves a list of messages that are in a conversation

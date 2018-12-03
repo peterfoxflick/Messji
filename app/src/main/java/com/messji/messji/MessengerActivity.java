@@ -95,6 +95,9 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     public void sendMessage(View view) {
         Log.v("sendMessage","IN SEND MESSAGE FUNCTION");
 
+        Database.loadDatabase(this);
+        Database db = new Database();
+
         /*try {*/
         // if the clientID of the message sender is the same as our's it was sent by us
         boolean belongsToCurrentUser = true;//Just for now
@@ -116,6 +119,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                 Database.addMessage(message);     //add the message to the database - this is very primitive right now
             }
         });
+
 
         // Clear the text field after sending the message
         editText.getText().clear();

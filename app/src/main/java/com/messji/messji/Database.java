@@ -36,7 +36,8 @@ public final class Database {
     private static List<User> users;
     private static DailyCount charCount;
 
-    public Integer getCharCount() {
+    public Integer getCharCount(Context context) {
+        loadCharCount(context);
         return charCount.getTodayCount();
     }
 
@@ -125,13 +126,17 @@ public final class Database {
 
     }
 
-    public static Integer loadCharCount(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
+    public Integer loadCharCount(Context context) {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
         if(sharedPreferences.contains("CharCount")){
             String data = sharedPreferences.getString("CharCount", "0");
             charCount = gson.fromJson(data, DailyCount.class);
+        } else {
+            charCount = new DailyCount();
+            charCount.setCount(5);
         }
 
         return charCount.getTodayCount();
@@ -140,7 +145,6 @@ public final class Database {
     public static void loadDatabase(Context context) {
         loadMessages(context);
         loadConversations(context);
-        loadCharCount(context);
         loadUsers(context);
     }
 
@@ -278,16 +282,16 @@ public final class Database {
 
 
         public Integer getTodayCount() {
-            Date now = new Date();
-            //Just get the time in day, not hours or minutes or seconds
-            long nowTime = now.getTime() - now.getTime() % 86400000;
-            long lastSet = date.getTime() - date.getTime() % 86400000;
+//            Date now = new Date();
+//            //Just get the time in day, not hours or minutes or seconds
+//            long nowTime = now.getTime() - now.getTime() % 86400000;
+//            long lastSet = date.getTime() - date.getTime() % 86400000;
+//
+//            if(nowTime != lastSet) {
+//                count = 0;
+//            }
 
-            if(nowTime != lastSet) {
-                count = 0;
-            }
-
-            return count;
+            return 5;
         }
 
 

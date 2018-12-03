@@ -22,6 +22,12 @@ public class Message {
         this.user_id = user_id;
     }
 
+    public Message(String text, int user_id) {
+        this.text = text;
+        this.timestamp = "Timestamp";
+        this.user_id = user_id;
+    }
+
     public String getDate() {
         return timestamp;
     }

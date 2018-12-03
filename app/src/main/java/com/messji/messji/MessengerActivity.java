@@ -47,6 +47,11 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         setContentView(R.layout.activity_messenger);
         editText = (EditText) findViewById(R.id.editText);
 
+        Database.loadDatabase(this);
+        Database db = new Database();
+        db.loadCharCount(this);
+
+
         // if negative 1 go back to home
 
         //Use conv ID to populate messages here
@@ -72,8 +77,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     //    }
 
 
-        // Construct the data source
-        Database.loadMessages(this);
 
 
        // List<Message> msgs = new ArrayList<Message>();

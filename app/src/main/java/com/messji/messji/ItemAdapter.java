@@ -17,7 +17,7 @@ import java.util.Random;
 public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
 
     // Declare the list of messages that the adapter will pull from
-    private List<Message> mMessages;
+    private static List<Message> mMessages;
 
     // Store the passed in messages so it can be used in the methods below
     ItemAdapter(List<Message> messages) {
@@ -46,8 +46,8 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, int position) {
         Log.d("On Message View", "Youre in");
-
         // Get the message at the position in the list and set the text to the view holder
+        //mMessages = Database.getMessages(); -- This should update the databse so the newest message will show, but it crashes after the first message
         String message = mMessages.get(position).getText();
         Log.v("onBindViewHolder:", "message is: " + message);
         messageViewHolder.mBubbleContent.setText(

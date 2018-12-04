@@ -181,7 +181,7 @@ public final class Database {
      * Note: Needs to still add to conversation list
      * @param message The message to save
      */
-    public void addMessage(Message message, Integer conversationId) {
+    public static void addMessage(Message message, Integer conversationId) {
         Conversation conversation = getConversationFromId(conversationId);
         int id = messages.size();
         message.setMessage_id(id);
@@ -195,7 +195,7 @@ public final class Database {
      * @param id the id of the conversation to retrive
      * @return the conversation or null if not found
      */
-    public Conversation getConversationFromId(Integer id){
+    public static Conversation getConversationFromId(Integer id){
         for(Conversation c: conversations){
             if (c.getId() == id){
                 return c;
@@ -231,19 +231,12 @@ public final class Database {
 
     }
 
-    public boolean isBelowLimit(Integer newCount){
+    public static boolean isBelowLimit(Integer newCount){
         if(newCount + charCount.getCount() <= charCount.getLimit()) {
             return true;
         }
         return false;
     }
-
-
-
-
-
-
-
 
 
     class DailyCount {

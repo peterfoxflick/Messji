@@ -103,9 +103,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         /*try {*/
         // if the clientID of the message sender is the same as our's it was sent by us
-        boolean belongsToCurrentUser = true;//Just for now
-
-        // if it was instead an object we could use a similar pattern to data parsing
+        boolean belongsToCurrentUser = true; //Just for now
 
         /*
             TODO: The user id needs to the user id
@@ -121,17 +119,21 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                     Since you're adding a new message, I recommend looking at the documentation for notifyItemInserted()
                  */
 
-                // messageAdapter.add(message);
-                // scroll the ListView to the last added element
-                // messagesView.setSelection(messagesView.getCount() - 1);
+                //Database db = new Database();
 
-                Database db = new Database();
-                if(db.isBelowLimit(message.getText().length()) ) {
-                    db.addMessage(message, convId);
+                if(Database.isBelowLimit(message.getText().length()) ) {
+                    Database.addMessage(message, convId);
+                    Log.d("getMessages:", "Size is: " + Database.getMessages().size());
+                    messageAdapter.notifyItemInserted(Database.getMessages().size() - 1);
+
                 }
+
+                // scroll the RecyclerView to the last added element
+                messagesView.getLayoutManager().scrollToPosition(messagesView.getChildCount() - 1);
+
+
             }
         });
-
 
         // Clear the text field after sending the message
         editText.getText().clear();

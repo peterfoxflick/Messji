@@ -99,7 +99,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         Log.v("sendMessage","IN SEND MESSAGE FUNCTION");
 
         Database.loadDatabase(this);
-        Database db = new Database();
+        //Database db = new Database();
 
         /*try {*/
         // if the clientID of the message sender is the same as our's it was sent by us
@@ -110,28 +110,22 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
          */
 
         final Message message = new Message(editText.getText().toString(), 1);
+        Database.loadDatabase(this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                /*
-                    TODO: You won't be able to directly add messages to a RecyclerView like you can a ListView
-                    After adding your message to the database, you let the adapter know to go fetch the new data
-                    Since you're adding a new message, I recommend looking at the documentation for notifyItemInserted()
-                 */
 
-                //Database db = new Database();
-
+                //Database db = new Database();      //changed a lot of database methods to static
                 if(Database.isBelowLimit(message.getText().length()) ) {
                     Database.addMessage(message, convId);
-                    Log.d("getMessages:", "Size is: " + Database.getMessages().size());
-                    messageAdapter.notifyItemInserted(Database.getMessages().size() - 1);
+                    Log.d("getMessages:", "Size is: " + Database.getMessages().size());  //TODO: Database is not growing
 
+                    messageAdapter.notifyItemInserted(Database.getMessages().size() - 1);
                 }
 
                 // scroll the RecyclerView to the last added element
-                messagesView.getLayoutManager().scrollToPosition(messagesView.getChildCount() - 1);
-
-
+                //messagesView.getLayoutManager().scrollToPosition(messagesView.getChildCount() - 1);
+                messagesView.smoothScrollToPosition(Database.getMessages().size() - 1);
             }
         });
 
@@ -144,7 +138,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         }*/
 
     public void onClose(){
-
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("draftText",editText.getText().toString());

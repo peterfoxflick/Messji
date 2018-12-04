@@ -47,7 +47,7 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, int position) {
         Log.d("On Message View", "Youre in");
         // Get the message at the position in the list and set the text to the view holder
-        //mMessages = Database.getMessages(); -- This should update the databse so the newest message will show, but it crashes after the first message
+        mMessages = Database.getMessages();  // -- This should update the databse so the newest message will show, but it crashes after the first message
         String message = mMessages.get(position).getText();
         Log.v("onBindViewHolder:", "message is: " + message);
         messageViewHolder.mBubbleContent.setText(
@@ -67,8 +67,8 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     // For checking what type of view should be returned based on the adapter position
     @Override
     public int getItemViewType(int position) {
-        return new Random().nextInt(2);
-    }
+        return new Random().nextInt(2); //TODO: Assign proper mesage to correct user
+    }   //
 
     // For getting the number of items in the adapter
     @Override

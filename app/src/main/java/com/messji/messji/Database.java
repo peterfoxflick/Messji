@@ -186,7 +186,9 @@ public final class Database {
         int id = messages.size();
         message.setMessage_id(id);
 
+        Log.v("addMessage:", "Message size (before) is: " + messages.size());
         messages.add(message);
+        Log.v("addMessage:", "Message size (after) is: " + messages.size());
 
     }
 

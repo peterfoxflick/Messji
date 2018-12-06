@@ -203,7 +203,7 @@ public final class Database {
      * @param conversation the conversation object to pull messages from
      * @return the list of messages in that conversation
      */
-    public List<Message> getMessagesFromConversation(Conversation conversation) {
+    public static List<Message> getMessagesFromConversation(Conversation conversation) {
         List<Message> results = new ArrayList<Message>();
 
         if(conversation != null) {
@@ -216,6 +216,30 @@ public final class Database {
             }
 
             return results;
+        }
+        return null;
+    }
+
+    public static List<Message> getMessagesFromConversationId(Integer id) {
+        Conversation conversation = getConversationFromId(id);
+        List<Integer> testMes = new ArrayList<Integer>();
+        testMes.add(1);
+        testMes.add(3);
+
+        conversation.setMessages(testMes);
+
+        if(conversation != null ) {
+            List<Message> results = new ArrayList<Message>();
+            List<Integer> messageId = conversation.getMessages();
+
+                for (Message m : messages) {
+                    Integer message_id = m.getMessage_id();
+                    if (messageId.contains(message_id)) {
+                        results.add(m);
+                    }
+                }
+
+                return results;
         }
         return null;
     }

@@ -126,7 +126,7 @@ public final class Database {
 
     }
 
-    public Integer loadCharCount(Context context) {
+    public static Integer loadCharCount(Context context) {
         SharedPreferences sharedPreferences;
         sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -146,6 +146,8 @@ public final class Database {
         loadMessages(context);
         loadConversations(context);
         loadUsers(context);
+        loadCharCount(context);
+
     }
 
     /**
@@ -242,7 +244,7 @@ public final class Database {
     }
 
 
-    class DailyCount {
+    static class DailyCount {
         private Integer count;
         private Date date;
         private Integer limit = 100;

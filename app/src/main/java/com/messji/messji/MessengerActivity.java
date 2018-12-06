@@ -39,6 +39,9 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         Intent intent = getIntent();
         convId = intent.getIntExtra("convId", -1);
 
+        Serializable convo = getIntent().getSerializableExtra("Conversation");
+        Log.d("nCreate:", "Conversation is: " + convo);
+
        // Serializable userExtra = intent.getSerializableExtra("User");
        // User user = (User) new Gson().fromJson(userExtra.toString(), User.class);
         this.setTitle("User Name here");

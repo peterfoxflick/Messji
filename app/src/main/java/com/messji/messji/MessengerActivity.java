@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.gson.Gson;
+import com.messji.messji.ConversationPackage.Conversation;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -29,17 +32,17 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         Intent intent = getIntent();
         convId = intent.getIntExtra("convId", -1);
 
-        Serializable convo = getIntent().getSerializableExtra("Conversation");
-        Log.d("nCreate:", "Conversation is: " + convo);
+        Serializable convExtra = getIntent().getSerializableExtra("Conversation");
+        Log.d("nCreate:", "Conversation is: " + convExtra);
+        Conversation conversation = new Gson().fromJson(convExtra.toString(), Conversation.class);
 
-        this.setTitle("User Name here");
+        this.setTitle("User Name here"); //TODO: this
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);
         editText = (EditText) findViewById(R.id.editText);
 
         Database.loadDatabase(this);
-        Database.loadCharCount(this);
 
         // if negative 1 go back to home
 
@@ -59,9 +62,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
             }
         }*/
 
-       
-       //messageAdapter = new ItemAdapter(Database.getmess)
-       // messageAdapter = new ItemAdapter(Database.getMessages());
+
+        messageAdapter = new ItemAdapter(Database.getMessagesFromConversationId(conversation.getId()));
         messagesView = findViewById(R.id.messages_view);
         messagesView.setLayoutManager(new LinearLayoutManager(this));
         messagesView.setAdapter(messageAdapter);
@@ -73,10 +75,12 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         */
         //getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ItemFragment()).commit();
 
-    };
+    }
+
+    ;
 
     public void sendMessage(View view) {
-        Log.v("sendMessage","IN SEND MESSAGE FUNCTION");
+        Log.v("sendMessage", "IN SEND MESSAGE FUNCTION");
 
         // if the clientID of the message sender is the same as our's it was sent by us
         boolean belongsToCurrentUser = true; //Just for now
@@ -90,7 +94,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
             @Override
             public void run() {
 
-                if(Database.isBelowLimit(message.getText().length()) ) {
+                if (Database.isBelowLimit(message.getText().length())) {
                     Database.addMessage(message, convId);
                     Log.d("getMessages:", "Size is: " + Database.getMessages().size());
 
@@ -106,11 +110,11 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         editText.getText().clear();
     }
 
-    public void onClose(){
+    public void onClose() {
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("draftText",editText.getText().toString());
-        editor.putInt("convId", convId );
+        editor.putString("draftText", editText.getText().toString());
+        editor.putInt("convId", convId);
         editor.commit();
     }
 }

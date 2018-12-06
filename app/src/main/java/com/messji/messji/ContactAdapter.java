@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.messji.messji.ConversationPackage.Conversation;
 
 import java.io.Serializable;
 import java.util.List;
@@ -60,6 +61,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
 
                 User user = mContact.get(position);
                 intent.putExtra("User", new Gson().toJson(user, User.class));
+
+                Conversation conversation = new Conversation();
+                intent.putExtra("Conversation", new Gson().toJson(conversation, Conversation.class));
 
                 v.getContext().startActivity(intent);
 

@@ -119,6 +119,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                     TODO: You won't be able to directly add messages to a RecyclerView like you can a ListView
                     After adding your message to the database, you let the adapter know to go fetch the new data
                     Since you're adding a new message, I recommend looking at the documentation for notifyItemInserted()
+
+                    abstract class for daily deal.
                  */
 
                 // messageAdapter.add(message);

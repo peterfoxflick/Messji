@@ -1,4 +1,4 @@
-package com.messji.messji;
+package com.messji.messji.Conversation;
 
 import android.content.Context;
 

@@ -8,20 +8,11 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.messji.messji.Conversation.Conversation;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -190,8 +181,9 @@ public final class Database {
         int id = messages.size();
         message.setMessage_id(id);
 
-        messages.add(message);
+        conversation.addMessage(id);
 
+        messages.add(message);
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.messji.messji;
+package com.messji.messji.Conversation;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.messji.messji.R;
 
 public class ConversationViewHolder extends RecyclerView.ViewHolder {
     LinearLayout mBackground;

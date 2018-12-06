@@ -1,18 +1,18 @@
-package com.messji.messji;
+package com.messji.messji.Conversation;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.messji.messji.MessengerActivity;
+import com.messji.messji.R;
 
 import java.util.List;
-import java.util.Random;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHolder> {
     private List<Conversation> mConversation;

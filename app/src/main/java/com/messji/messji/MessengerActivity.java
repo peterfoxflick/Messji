@@ -18,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MessengerActivity extends AppCompatActivity implements Serializable {
 
@@ -62,8 +64,10 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
             }
         }*/
 
+        List<Message> messages;
+        messages = Database.getMessagesFromConversationId(1);
 
-        messageAdapter = new ItemAdapter(Database.getMessagesFromConversationId(conversation.getId()));
+        messageAdapter = new ItemAdapter(messages);
         messagesView = findViewById(R.id.messages_view);
         messagesView.setLayoutManager(new LinearLayoutManager(this));
         messagesView.setAdapter(messageAdapter);

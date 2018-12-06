@@ -222,12 +222,19 @@ public final class Database {
 
     public static List<Message> getMessagesFromConversationId(Integer id) {
         Conversation conversation = getConversationFromId(id);
+        List<Integer> testMes = new ArrayList<Integer>();
+        testMes.add(1);
+        testMes.add(3);
+
+        conversation.setMessages(testMes);
+
         if(conversation != null ) {
             List<Message> results = new ArrayList<Message>();
-             List<Integer> messageId = conversation.getMessages();
+            List<Integer> messageId = conversation.getMessages();
 
                 for (Message m : messages) {
-                    if (messageId.contains(m.getMessage_id())) {
+                    Integer message_id = m.getMessage_id();
+                    if (messageId.contains(message_id)) {
                         results.add(m);
                     }
                 }

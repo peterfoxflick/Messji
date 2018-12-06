@@ -117,7 +117,7 @@ public final class Database {
 
     }
 
-    public Integer loadCharCount(Context context) {
+    public static Integer loadCharCount(Context context) {
         SharedPreferences sharedPreferences;
         sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
@@ -137,6 +137,8 @@ public final class Database {
         loadMessages(context);
         loadConversations(context);
         loadUsers(context);
+        loadCharCount(context);
+
     }
 
     /**
@@ -166,22 +168,21 @@ public final class Database {
 
     }
 
-
-
-
-
     // More of the interaction part
     /**
      * Adds a message to the database so it can be stored for future use.
      * Note: Needs to still add to conversation list
      * @param message The message to save
      */
-    public void addMessage(Message message, Integer conversationId) {
+    public static void addMessage(Message message, Integer conversationId) {
         Conversation conversation = getConversationFromId(conversationId);
         int id = messages.size();
         message.setMessage_id(id);
-
         conversation.addMessage(id);
+        //conversation.addMessage(conversationId); -- causes crash
+        Log.v("addMessage:", "Message size (before) is: " + messages.size());
+        messages.add(message);
+        Log.v("addMessage:", "Message size (after) is: " + messages.size());
 
         messages.add(message);
     }
@@ -191,7 +192,7 @@ public final class Database {
      * @param id the id of the conversation to retrive
      * @return the conversation or null if not found
      */
-    public Conversation getConversationFromId(Integer id){
+    public static Conversation getConversationFromId(Integer id){
         for(Conversation c: conversations){
             if (c.getId() == id){
                 return c;
@@ -199,7 +200,6 @@ public final class Database {
         }
         return null;
     }
-
 
     /**
      * retrieves a list of messages that are in a conversation
@@ -228,7 +228,7 @@ public final class Database {
 
     }
 
-    public boolean isBelowLimit(Integer newCount){
+    public static boolean isBelowLimit(Integer newCount){
         if(newCount + charCount.getCount() <= charCount.getLimit()) {
             return true;
         }
@@ -236,14 +236,7 @@ public final class Database {
     }
 
 
-
-
-
-
-
-
-
-    class DailyCount {
+    static class DailyCount {
         private Integer count;
         private Date date;
         private Integer limit = 100;

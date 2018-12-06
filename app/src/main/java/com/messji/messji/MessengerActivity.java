@@ -27,6 +27,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     private ItemAdapter messageAdapter;
     private RecyclerView messagesView;
     private int convId;
+    private List<Message> messages;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +52,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         //Use conv ID to populate messages here
 
-        /*JSONArray conversations = new JSONArray(Database.getConversations());
-
-        for (int i = 0; i < conversations.length(); i++) {
-            try {
-                if ((conversations.getInt(0) ) == convId) {  //convID = -1 right now"
-                    //load up these messages since they are a match
-                    Log.d("if statement", "it's a match!");
-                    //Need to get all matching conversation messages to the view
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }*/
-
-        List<Message> messages;
         messages = Database.getMessagesFromConversationId(1);
 
         messageAdapter = new ItemAdapter(messages);
@@ -101,8 +88,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                 if (Database.isBelowLimit(message.getText().length())) {
                     Database.addMessage(message, convId);
                     Log.d("getMessages:", "Size is: " + Database.getMessages().size());
-
-                    messageAdapter.notifyItemInserted(Database.getMessages().size() - 1);
+                    messages.add(message);
+                    messageAdapter.notifyItemInserted(messages.size() - 1);
                 }
 
                 // scroll the RecyclerView to the last added element

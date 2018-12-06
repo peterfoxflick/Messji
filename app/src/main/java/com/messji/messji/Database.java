@@ -200,21 +200,24 @@ public final class Database {
 
     /**
      * retrieves a list of messages that are in a conversation
-     * @param id the id of the conversation the messages are in
+     * @param conversation the conversation object to pull messages from
      * @return the list of messages in that conversation
      */
-    public List<Message> getMessagesFromConversation(Integer id) {
+    public List<Message> getMessagesFromConversation(Conversation conversation) {
         List<Message> results = new ArrayList<Message>();
 
-        Conversation conversation = getConversationFromId(id);
+        if(conversation != null) {
+            List<Integer> messageId = conversation.getMessages();
 
-        for (Message m: messages) {
-            if(conversation.getMessages().contains(m.getMessage_id())){
-                results.add(m);
+            for (Message m : messages) {
+                if (messageId.contains(m.getMessage_id())) {
+                    results.add(m);
+                }
             }
-        }
 
-        return results;
+            return results;
+        }
+        return null;
     }
 
     public void addCount(Integer newCount){

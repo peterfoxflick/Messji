@@ -47,7 +47,7 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, int position) {
         Log.d("On Message View", "Youre in");
         // Get the message at the position in the list and set the text to the view holder
-        mMessages = Database.getMessages();  // -- This should update the databse so the newest message will show, but it crashes after the first message
+        mMessages = Database.getMessages();
         String message = mMessages.get(position).getText();
         Log.v("onBindViewHolder:", "message is: " + message);
         messageViewHolder.mBubbleContent.setText(

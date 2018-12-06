@@ -8,7 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.messji.messji.Conversation.Conversation;
+import com.messji.messji.ConversationPackage.Conversation;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -178,13 +178,10 @@ public final class Database {
         Conversation conversation = getConversationFromId(conversationId);
         int id = messages.size();
         message.setMessage_id(id);
-        conversation.addMessage(id);
         //conversation.addMessage(conversationId); -- causes crash
         Log.v("addMessage:", "Message size (before) is: " + messages.size());
         messages.add(message);
         Log.v("addMessage:", "Message size (after) is: " + messages.size());
-
-        messages.add(message);
     }
 
     /**

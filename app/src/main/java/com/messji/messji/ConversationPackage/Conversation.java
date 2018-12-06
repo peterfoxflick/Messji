@@ -1,6 +1,4 @@
-package com.messji.messji.Conversation;
-
-import android.content.Context;
+package com.messji.messji.ConversationPackage;
 
 import java.util.List;
 

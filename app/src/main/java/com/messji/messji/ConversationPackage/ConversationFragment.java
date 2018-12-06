@@ -1,4 +1,4 @@
-package com.messji.messji.Conversation;
+package com.messji.messji.ConversationPackage;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

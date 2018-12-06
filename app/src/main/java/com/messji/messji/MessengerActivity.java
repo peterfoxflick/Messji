@@ -39,6 +39,9 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         Intent intent = getIntent();
         convId = intent.getIntExtra("convId", -1);
 
+        Serializable convo = getIntent().getSerializableExtra("Conversation");
+        Log.d("nCreate:", "Conversation is: " + convo);
+
        // Serializable userExtra = intent.getSerializableExtra("User");
        // User user = (User) new Gson().fromJson(userExtra.toString(), User.class);
         this.setTitle("User Name here");
@@ -48,14 +51,15 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         editText = (EditText) findViewById(R.id.editText);
 
         Database.loadDatabase(this);
-        Database db = new Database();
+        //Database.loadCharCount(this);
+        Database db = new Database();    //TODO: Make this all static?
         db.loadCharCount(this);
 
 
         // if negative 1 go back to home
 
         //Use conv ID to populate messages here
-        Database.loadConversations(this); //TODO - keep fixing this ol thing
+        //Database.loadConversations(this); //TODO - keep fixing this ol thing
         JSONArray conversations = new JSONArray(Database.getConversations());
         for (int i = 0; i < conversations.length(); i++) {
             try {
@@ -98,8 +102,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     public void sendMessage(View view) {
         Log.v("sendMessage","IN SEND MESSAGE FUNCTION");
 
-        Database.loadDatabase(this);
-        Database db = new Database();
+        //Database.loadDatabase(this);
+        //Database db = new Database();
 
         /*try {*/
         // if the clientID of the message sender is the same as our's it was sent by us
@@ -110,28 +114,22 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
          */
 
         final Message message = new Message(editText.getText().toString(), 1);
+        //Database.loadDatabase(this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                /*
-                    TODO: You won't be able to directly add messages to a RecyclerView like you can a ListView
-                    After adding your message to the database, you let the adapter know to go fetch the new data
-                    Since you're adding a new message, I recommend looking at the documentation for notifyItemInserted()
-                 */
 
-                //Database db = new Database();
-
+                //Database db = new Database();      //changed a lot of database methods to static
                 if(Database.isBelowLimit(message.getText().length()) ) {
                     Database.addMessage(message, convId);
-                    Log.d("getMessages:", "Size is: " + Database.getMessages().size());
-                    messageAdapter.notifyItemInserted(Database.getMessages().size() - 1);
+                    Log.d("getMessages:", "Size is: " + Database.getMessages().size());  //TODO: Database is not growing
 
+                    messageAdapter.notifyItemInserted(Database.getMessages().size() - 1);
                 }
 
                 // scroll the RecyclerView to the last added element
-                messagesView.getLayoutManager().scrollToPosition(messagesView.getChildCount() - 1);
-
-
+                //messagesView.getLayoutManager().scrollToPosition(messagesView.getChildCount() - 1);
+                messagesView.smoothScrollToPosition(Database.getMessages().size() - 1);
             }
         });
 
@@ -144,7 +142,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         }*/
 
     public void onClose(){
-
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("draftText",editText.getText().toString());

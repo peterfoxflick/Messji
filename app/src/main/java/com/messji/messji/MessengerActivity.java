@@ -48,14 +48,15 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         editText = (EditText) findViewById(R.id.editText);
 
         Database.loadDatabase(this);
-        Database db = new Database();
+        //Database.loadCharCount(this);
+        Database db = new Database();    //TODO: Make this all static?
         db.loadCharCount(this);
 
 
         // if negative 1 go back to home
 
         //Use conv ID to populate messages here
-        Database.loadConversations(this); //TODO - keep fixing this ol thing
+        //Database.loadConversations(this); //TODO - keep fixing this ol thing
         JSONArray conversations = new JSONArray(Database.getConversations());
         for (int i = 0; i < conversations.length(); i++) {
             try {
@@ -98,7 +99,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     public void sendMessage(View view) {
         Log.v("sendMessage","IN SEND MESSAGE FUNCTION");
 
-        Database.loadDatabase(this);
+        //Database.loadDatabase(this);
         //Database db = new Database();
 
         /*try {*/
@@ -110,7 +111,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
          */
 
         final Message message = new Message(editText.getText().toString(), 1);
-        Database.loadDatabase(this);
+        //Database.loadDatabase(this);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

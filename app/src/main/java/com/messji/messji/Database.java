@@ -27,8 +27,8 @@ public final class Database {
     private static List<User> users;
     private static DailyCount charCount;
 
-    public Integer getCharCount(Context context) {
-        loadCharCount(context);
+    public static Integer getCharCount() {
+        //loadCharCount(context);
         return charCount.getTodayCount();
     }
 

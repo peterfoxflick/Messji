@@ -8,14 +8,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
+import com.messji.messji.ContactPackage.Contact;
+import com.messji.messji.ContactPackage.ContactsActivity;
 import com.messji.messji.ConversationPackage.ConversationFragment;
 
 public class MessjiActivity extends AppCompatActivity {
 
-    User myUser = new User("Douglas", "C. Hanson", "+18017457869", R.drawable.avitar);
-    User[] contacts = null;
+    Contact myContact = new Contact("Douglas", "C. Hanson", "+18017457869", R.drawable.avitar);
+    Contact[] contacts = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,8 @@ public class MessjiActivity extends AppCompatActivity {
             //if in conversation go there
 
             Intent intent = new Intent(this, MessengerActivity.class);
-            // this will not be User class, it will be a conversation
-            intent.putExtra("myUser", myUser);
+            // this will not be Contact class, it will be a conversation
+            intent.putExtra("myContact", myContact);
             intent.putExtra("lastConvId", lastConvId);
             startActivity(intent);
         }
@@ -63,7 +64,7 @@ public class MessjiActivity extends AppCompatActivity {
                 return true;
             case R.id.action_see_profile:
                 Intent profileIntent = new Intent(this, ProfileActivity.class);
-                profileIntent.putExtra("myUser", myUser);
+                profileIntent.putExtra("myContact", myContact);
                 startActivity(profileIntent);
                 return true;
             default:

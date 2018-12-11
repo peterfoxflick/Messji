@@ -1,27 +1,26 @@
-package com.messji.messji;
+package com.messji.messji.ContactPackage;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.messji.messji.ConversationPackage.Conversation;
+import com.messji.messji.MessengerActivity;
+import com.messji.messji.R;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Random;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> implements Serializable {
-    private List<User> mContact;
+    private List<Contact> mContact;
 
     // Store the passed in messages so it can be used in the methods below
-    ContactAdapter(List<User> contacts) {
+    ContactAdapter(List<Contact> contacts) {
         mContact = contacts;
     }
 
@@ -59,8 +58,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
 
                 Intent intent = new Intent(v.getContext(), MessengerActivity.class);
 
-                User user = mContact.get(position);
-                intent.putExtra("User", new Gson().toJson(user, User.class));
+                Contact contact = mContact.get(position);
+                intent.putExtra("Contact", new Gson().toJson(contact, Contact.class));
 
                 Conversation conversation = new Conversation();
                 intent.putExtra("Conversation", new Gson().toJson(conversation, Conversation.class));

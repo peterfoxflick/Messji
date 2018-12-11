@@ -40,7 +40,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         Log.d("nCreate:", "Conversation is: " + convExtra);
         Conversation conversation = new Gson().fromJson(convExtra.toString(), Conversation.class);
 
-        this.setTitle("User Name here"); //TODO: this
+        this.setTitle("Contact Name here"); //TODO: this
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);

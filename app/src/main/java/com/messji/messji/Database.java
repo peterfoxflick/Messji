@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.messji.messji.ContactPackage.Contact;
 import com.messji.messji.ConversationPackage.Conversation;
 
 import java.io.BufferedReader;
@@ -17,14 +18,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Acts as a database for the app storing a list of messages, conversations, and users.
+ * Acts as a database for the app storing a list of messages, conversations, and contacts.
  * The information is initially pulled from a starting file, and then stored as a
  * shared preference.
  */
 public final class Database {
     private static List<Message> messages;
     private static List<Conversation> conversations;
-    private static List<User> users;
+    private static List<Contact> contacts;
     private static DailyCount charCount;
 
     public static Integer getCharCount() {
@@ -47,15 +48,15 @@ public final class Database {
     }
 
     /**
-     * Returns the list of all users (contacts lists)
+     * Returns the list of all contacts (contacts lists)
      * @return List of Users
      */
-    public static List getUsers() {
-        return users;
+    public static List getContacts() {
+        return contacts;
     }
 
     /**
-     * Pulls the users from the users.json file. This acts as an inital list of users for the
+     * Pulls the contacts from the contacts.json file. This acts as an inital list of contacts for the
      * app
      * @param context Nesccessary to find the file. From an activity just pass in "this"
      */
@@ -65,13 +66,13 @@ public final class Database {
 
         if(sharedPreferences.contains("Users")){
             String data = sharedPreferences.getString("Users", "");
-            users = gson.fromJson(data, new TypeToken<List<User>>(){}.getType() );
+            contacts = gson.fromJson(data, new TypeToken<List<Contact>>(){}.getType() );
         } else {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
-            users = gson.fromJson(bufferedReader, new TypeToken<List<User>>(){}.getType());
+            contacts = gson.fromJson(bufferedReader, new TypeToken<List<Contact>>(){}.getType());
         }
 
-        Log.i("Loaded Users: ", users != null ? users.toString() : null);
+        Log.i("Loaded Users: ", contacts != null ? contacts.toString() : null);
 
     }
 
@@ -157,8 +158,8 @@ public final class Database {
         data = new Gson().toJson(conversations);
         editor.putString("Conversations", data);
 
-        //Third save users
-        data = new Gson().toJson(users);
+        //Third save contacts
+        data = new Gson().toJson(contacts);
         editor.putString("Users", data);
 
         data = new Gson().toJson(charCount);

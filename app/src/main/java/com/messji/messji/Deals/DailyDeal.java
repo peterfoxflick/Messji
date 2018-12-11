@@ -2,6 +2,7 @@ package com.messji.messji.Deals;
 
 import com.messji.messji.Database;
 import com.messji.messji.Message;
+import com.vdurmont.emoji.EmojiParser;
 
 import java.util.Calendar;
 
@@ -98,9 +99,7 @@ public class DailyDeal {
     }
 
     protected int getLength() {
-        int emojis = message.getText().split("(\\\\u).{1,4}", -1).length - 1;
-
-        return emojis;
+        return EmojiParser.removeAllEmojis(message.getText()).length();
     }
 
     public boolean canSend() {

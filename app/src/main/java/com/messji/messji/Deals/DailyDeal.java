@@ -1,12 +1,50 @@
 package com.messji.messji.Deals;
 
-public abstract class DailyDeal {
-    private String message;
+import com.messji.messji.Database;
+import com.messji.messji.Message;
+
+import java.util.Calendar;
+
+public class DailyDeal {
+    private Message message;
+    private String title;
     private String description;
     private String imageEmoji;
 
-    public DailyDeal(String message) {
+    protected DailyDeal(Message message) {
         this.message = message;
+    }
+
+    public static DailyDeal getTodaysDeal(Message message) {
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (day){
+            case Calendar.MONDAY:
+                return new MondayDeal(message);
+            case Calendar.TUESDAY:
+                return null;
+            case Calendar.WEDNESDAY:
+                return null;
+            case Calendar.THURSDAY:
+                return null;
+            case Calendar.FRIDAY:
+                return null;
+            case Calendar.SATURDAY:
+                return null;
+            case Calendar.SUNDAY:
+                return null;
+                default:
+                    return new DailyDeal(message);
+        }
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    protected void setTitle(String title) {
+        this.title = title;
     }
 
     protected void setDescription(String description) {
@@ -17,11 +55,11 @@ public abstract class DailyDeal {
         this.imageEmoji = imageEmoji;
     }
 
-    public String getMessage() {
+    public Message getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Message message) {
         this.message = message;
     }
 
@@ -33,27 +71,35 @@ public abstract class DailyDeal {
         return imageEmoji;
     }
 
-    public void outgoingMessage() {
-
+    public boolean outgoingMessage(int conversationId) {
+        if (canSend()) {
+            subtractCharCount(getLength());
+            Database.addMessage(message, conversationId);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void incomingMessage() {
 
     }
 
-    protected void updateCharCount(int bonus) {
+    protected void subtractCharCount(int bonus) {
+        Database db = new Database();
+        db.addCount(bonus * (-1));
 
     }
 
     protected int getCharCount(String searchText) {
-        return 0;
+        return message.getText().split(searchText, -1).length - 1;
     }
 
     protected int getLength() {
-        return message.length();
+        return message.getText().length();
     }
 
     public boolean canSend() {
-        return true;
+        return Database.getCharCount() >= getLength();
     }
 }

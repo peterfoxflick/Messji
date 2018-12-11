@@ -1,20 +1,17 @@
 package com.messji.messji.Deals;
 
-import com.messji.messji.Database;
+import com.messji.messji.Message;
 
-public class MondayDeal extends DailyDeal{
+public class MondayDeal extends DailyDeal {
 
-    public MondayDeal(String message) {
+    protected MondayDeal(Message message) {
         super(message);
-        setDescription("Hate Mail Monday");
+        setTitle("Hate Mail Monday");
+
+        setDescription("Everyone hates Mondays, so we gave you an excuse not to text anyone. Every message counts as double today!");
 
         // This is the angry emoji 😠
         setImageEmoji("\uD83D\uDE20");
-    }
-
-    @Override
-    public void outgoingMessage() {
-        updateCharCount(getLength() * (-1));
     }
 
     @Override
@@ -22,8 +19,4 @@ public class MondayDeal extends DailyDeal{
         return super.getLength() * 2;
     }
 
-    @Override
-    public boolean canSend() {
-        return Database.getCharCount() > getLength();
-    }
 }

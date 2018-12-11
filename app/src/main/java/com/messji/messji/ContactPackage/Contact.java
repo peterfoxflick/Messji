@@ -1,15 +1,15 @@
-package com.messji.messji;
+package com.messji.messji.ContactPackage;
 
 import java.io.Serializable;
 
-class User implements Serializable {
+public class Contact implements Serializable {
     private int id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private int photo;
 
-    public User(String firstName, String lastName, String phoneNumber, int photo) {
+    public Contact(String firstName, String lastName, String phoneNumber, int photo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;

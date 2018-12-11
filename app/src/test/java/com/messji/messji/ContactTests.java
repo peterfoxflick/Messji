@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class UserTests {
+public class ContactTests {
     @Test
     public void getFullNameTest() {
         //create user

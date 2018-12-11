@@ -9,7 +9,7 @@ public class Message {
     private String timestamp;
     private String text; // message body
 
-    //private User data; // data of the user that sent this message
+    //private Contact data; // data of the user that sent this message
 
     private boolean belongsToCurrentUser; // is this message sent by us?
 
@@ -44,7 +44,7 @@ public class Message {
         this.text = text;
     }
 
-    /* public User getData() {
+    /* public Contact getData() {
         return data;
     }*/
 

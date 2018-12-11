@@ -27,7 +27,7 @@
             android:parentActivityName=".MessjiActivity" />
         <activity
             android:label="@string/activity_title_contacts"
-            android:name=".ContactsActivity"
+            android:name=".ContactPackage.ContactsActivity"
             android:parentActivityName=".MessjiActivity" />
     </application>
 

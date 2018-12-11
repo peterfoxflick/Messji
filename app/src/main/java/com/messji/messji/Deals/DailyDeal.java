@@ -19,26 +19,26 @@ public class DailyDeal {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
-//        return new TuesdayDeal(message);
+        return new WednesdayDeal(message);
 
-        switch (day) {
-            case Calendar.MONDAY:
-                return new MondayDeal(message);
-            case Calendar.TUESDAY:
-                return new TuesdayDeal(message);
-            case Calendar.WEDNESDAY:
-                return new WednesdayDeal(message);
-            case Calendar.THURSDAY:
-                return null;
-            case Calendar.FRIDAY:
-                return null;
-            case Calendar.SATURDAY:
-                return null;
-            case Calendar.SUNDAY:
-                return null;
-            default:
-                return new DailyDeal(message);
-        }
+//        switch (day) {
+//            case Calendar.MONDAY:
+//                return new MondayDeal(message);
+//            case Calendar.TUESDAY:
+//                return new TuesdayDeal(message);
+//            case Calendar.WEDNESDAY:
+//                return new WednesdayDeal(message);
+//            case Calendar.THURSDAY:
+//                return null;
+//            case Calendar.FRIDAY:
+//                return null;
+//            case Calendar.SATURDAY:
+//                return null;
+//            case Calendar.SUNDAY:
+//                return null;
+//            default:
+//                return new DailyDeal(message);
+//        }
     }
 
     public String getTitle() {
@@ -98,7 +98,9 @@ public class DailyDeal {
     }
 
     protected int getLength() {
-        return message.getText().length();
+        int emojis = message.getText().split("(\\\\u).{1,4}", -1).length - 1;
+
+        return emojis;
     }
 
     public boolean canSend() {

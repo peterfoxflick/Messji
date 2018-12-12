@@ -29,13 +29,15 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         Log.v("MessageViewHolder:", "In MessageViewHoler");
+        Log.d("MessageViewHolder:", "viewType is: " + viewType);
 
         // Inflate the item layout when the view holder is created
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.fragment_item, viewGroup, false);
 
         // Depending on the view type, either return the incoming or outgoing view holder
-        if (viewType == 0) {
+        //if (viewType == 0) {
+        if (mMessages.get(viewType).isBelongsToCurrentUser()) {
             return new IncomingViewHolder(view);
         } else {
             return new OutgoingViewHolder(view);
@@ -66,8 +68,10 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     // For checking what type of view should be returned based on the adapter position
     @Override
     public int getItemViewType(int position) {
-        return new Random().nextInt(2); //TODO: Assign proper mesage to correct user
-    }   //
+        Log.d("getItemViewType", "Position is: " + position); // Just check if from editText?
+        return position;
+        //return new Random().nextInt(2); //TODO: Assign proper message to correct user
+    }
 
     // For getting the number of items in the adapter
     @Override

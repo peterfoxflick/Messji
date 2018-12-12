@@ -13,7 +13,7 @@ public class DailyDeal {
     private String imageEmoji;
 
     protected DailyDeal(Message message) {
-        this.message = message;
+        setMessage(message);
     }
 
     public static DailyDeal getTodaysDeal(Message message) {
@@ -63,7 +63,12 @@ public class DailyDeal {
     }
 
     public void setMessage(Message message) {
-        this.message = message;
+        if(message != null) {
+            this.message = message;
+
+        } else {
+            this.message = new Message("FAKE", 1);
+        }
     }
 
     public String getDescription() {
@@ -91,7 +96,6 @@ public class DailyDeal {
     protected void subtractCharCount(int bonus) {
         Database db = new Database();
         db.addCount(bonus * (-1));
-
     }
 
     protected int getCharCount(String searchText) {

@@ -20,28 +20,27 @@ public class DailyDeal {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
-
         // NOTICE: THIS IS HARDCODED FOR TESTING PURPOSES!
         return new FridayDeal(message);
 
-//        switch (day) {
-//            case Calendar.MONDAY:
-//                return new MondayDeal(message);
-//            case Calendar.TUESDAY:
-//                return new TuesdayDeal(message);
-//            case Calendar.WEDNESDAY:
-//                return new WednesdayDeal(message);
-//            case Calendar.THURSDAY:
-//                 return new ThursdayDeal(message);
-//            case Calendar.FRIDAY:
-//                 return new FridayDeal(message);
-//            case Calendar.SATURDAY:
-//                 return new SaturdayDeal(message);
-//            case Calendar.SUNDAY:
-//                 return new SundayDeal(message);
-//            default:
-//                return new DailyDeal(message);
-//        }
+        switch (day) {
+            case Calendar.MONDAY:
+                return new MondayDeal(message);
+            case Calendar.TUESDAY:
+                return new TuesdayDeal(message);
+            case Calendar.WEDNESDAY:
+                return new WednesdayDeal(message);
+            case Calendar.THURSDAY:
+                 return new ThursdayDeal(message);
+            case Calendar.FRIDAY:
+                 return new FridayDeal(message);
+            case Calendar.SATURDAY:
+                 return new SaturdayDeal(message);
+            case Calendar.SUNDAY:
+                 return new SundayDeal(message);
+            default:
+                return new DailyDeal(message);
+        }
     }
 
     public String getTitle() {

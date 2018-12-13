@@ -35,8 +35,7 @@ public class DailyDeal {
             case Calendar.FRIDAY:
                  return new FridayDeal(message);
             case Calendar.SATURDAY:
-//                 return new SaturdayDeal(message);
-                return new FridayDeal(message);
+                 return new SaturdayDeal(message);
             case Calendar.SUNDAY:
                  return new SundayDeal(message);
             default:

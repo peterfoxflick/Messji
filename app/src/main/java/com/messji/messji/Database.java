@@ -27,6 +27,7 @@ public final class Database {
     private static List<Conversation> conversations;
     private static List<Contact> contacts;
     private static DailyCount charCount;
+    private static Integer fridayR;
 
     public static Integer getCharCount() {
         return charCount.getTodayCount();
@@ -145,6 +146,22 @@ public final class Database {
 
         return charCount.getTodayCount();
     }
+
+
+    public static int loadFridayR(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
+        //Friday Random Number
+        fridayR = sharedPreferences.getInt("FridayR", 3);
+        return fridayR;
+    }
+
+    public static int getFridayR(){
+        if (fridayR != null)
+            return fridayR;
+        else
+            return 3;
+    }
+
 
     public static void loadDatabase(Context context) {
         loadMessages(context);

@@ -1,5 +1,7 @@
 package com.messji.messji.Deals;
 
+import android.util.Log;
+
 import com.messji.messji.Database;
 import com.messji.messji.Message;
 import com.vdurmont.emoji.EmojiParser;
@@ -100,6 +102,7 @@ public class DailyDeal {
     }
 
     protected int getCharCount(String searchText) {
+        Log.d("getCharCount:", "searchText is: " + searchText);
         return message.getText().split(searchText, -1).length - 1;
     }
 

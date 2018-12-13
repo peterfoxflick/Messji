@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.messji.messji.Database;
 import com.messji.messji.Message;
+import com.vdurmont.emoji.EmojiParser;
 
 import java.util.Random;
 
@@ -50,8 +51,9 @@ public class FridayDeal extends DailyDeal {
 
     @Override
     protected int getLength() {
+        int length =  EmojiParser.removeAllEmojis(getMessage().getText()).length();
         int santas = getCharCount(getImageEmoji());
         int points = santas * 10;
-        return getMessage().getText().length() - points;
+        return length - points;
     }
 }

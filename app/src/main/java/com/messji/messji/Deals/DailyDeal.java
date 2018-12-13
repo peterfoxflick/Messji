@@ -22,7 +22,7 @@ public class DailyDeal {
 
 
         // NOTICE: THIS IS HARDCODED FOR TESTING PURPOSES!
-        return new WednesdayDeal(message);
+        return new FridayDeal(message);
 
 //        switch (day) {
 //            case Calendar.MONDAY:

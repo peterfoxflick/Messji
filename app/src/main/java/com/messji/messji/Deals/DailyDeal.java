@@ -108,6 +108,6 @@ public class DailyDeal {
     }
 
     public boolean canSend() {
-        return Database.getCharCount() >= getLength();
+        return Database.getCharCount() >= getLength() && getMessage().getText().length() > 0;
     }
 }

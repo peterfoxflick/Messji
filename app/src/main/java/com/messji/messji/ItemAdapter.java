@@ -36,7 +36,6 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
                 .inflate(R.layout.fragment_item, viewGroup, false);
 
         // Depending on the view type, either return the incoming or outgoing view holder
-        //if (viewType == 0) {
         if (mMessages.get(viewType).isBelongsToCurrentUser()) {
             return new IncomingViewHolder(view);
         } else {
@@ -52,8 +51,10 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         String message = mMessages.get(position).getText();
         Log.v("onBindViewHolder:", "message is: " + message);
         messageViewHolder.mBubbleContent.setText(
+                new StringBuilder().append(message));
+        /*messageViewHolder.mBubbleContent.setText(
                 new StringBuilder().append("(").append(position).append(") ").append(message)
-        );
+        );*/
 
         // Show a different visual treatment for incoming and outgoing messages
         if (messageViewHolder instanceof IncomingViewHolder) {
@@ -70,7 +71,7 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     public int getItemViewType(int position) {
         Log.d("getItemViewType", "Position is: " + position); // Just check if from editText?
         return position;
-        //return new Random().nextInt(2); //TODO: Assign proper message to correct user
+        //return new Random().nextInt(2);
     }
 
     // For getting the number of items in the adapter

@@ -104,7 +104,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         });
 
 
-        this.setTitle(Database.getCharCount().toString()); //TODO: this
+        this.setTitle("You have " + Database.getCharCount().toString() + " characters left");
+        //this.setTitle(Database.getCharCount().toString());
 
         // Clear the text field after sending the message
         editText.getText().clear();

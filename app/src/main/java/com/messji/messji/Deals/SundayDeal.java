@@ -1,6 +1,7 @@
 package com.messji.messji.Deals;
 
 import com.messji.messji.Message;
+import com.vdurmont.emoji.EmojiParser;
 
 public class SundayDeal extends DailyDeal {
 
@@ -26,8 +27,9 @@ public class SundayDeal extends DailyDeal {
 
     @Override
     protected int getLength() {
+        int length =  EmojiParser.removeAllEmojis(getMessage().getText()).length();
         int balls = getCharCount(getImageEmoji());
         int points = balls * 10;
-        return getMessage().getText().length() - points;
+        return length - points;
     }
 }

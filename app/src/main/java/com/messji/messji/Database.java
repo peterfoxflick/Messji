@@ -177,11 +177,8 @@ public final class Database {
         editor.putString("Users", data);
         editor.apply();
 
-        Log.i("Save", "I am about to save char count");
-
         data = new Gson().toJson(charCount);
         editor.putString("CharCount", data);
-
         editor.apply();
 
     }
@@ -197,12 +194,20 @@ public final class Database {
         Conversation conversation = getConversationFromId(conversationId);
         int id = messages.size();
         message.setMessage_id(id);
-        conversation.addMessage(conversationId);
-        Log.v("addMessage:", "Conversation size is: " + conversation.getMessages().size());
 
-        Log.v("addMessage:", "Message size (before) is: " + messages.size());
+        Log.v("addMessage", "Msg id is: " + id);
+
+        Log.v("addMessage", "Conversation size (before) is: " + conversation.getMessages().size());
+
+        assert conversation != null;
+        conversation.addMessage(id);
+
+        Log.v("addMessage", "Conversation size (after) is: " + conversation.getMessages().size());
+
+
+        Log.v("addMessage", "Message size (before) is: " + messages.size());
         messages.add(message);
-        Log.v("addMessage:", "Message size (after) is: " + messages.size());
+        Log.v("addMessage", "Message size (after) is: " + messages.size());
     }
 
     /**
@@ -243,19 +248,17 @@ public final class Database {
 
     public static List<Message> getMessagesFromConversationId(Integer id) {
         Conversation conversation = getConversationFromId(id);
-        List<Integer> testMes = new ArrayList<Integer>();
-        testMes.add(1);
-        testMes.add(3);
-
-        conversation.setMessages(testMes);
 
         if(conversation != null ) {
             List<Message> results = new ArrayList<Message>();
             List<Integer> messageId = conversation.getMessages();
+            Log.i("GetMsgFromConv", "msg ids:" + messageId.toString());
 
-                for (Message m : messages) {
+
+            for (Message m : messages) {
                     Integer message_id = m.getMessage_id();
                     if (messageId.contains(message_id)) {
+                        Log.i("GetMsgFromConv", "Found msg with id:" + m.getMessage_id());
                         results.add(m);
                     }
                 }

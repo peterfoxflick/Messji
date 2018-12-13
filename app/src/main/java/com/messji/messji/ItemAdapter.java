@@ -51,10 +51,8 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
         String message = mMessages.get(position).getText();
         Log.v("onBindViewHolder:", "message is: " + message);
         messageViewHolder.mBubbleContent.setText(
-                new StringBuilder().append(message));
-        /*messageViewHolder.mBubbleContent.setText(
-                new StringBuilder().append("(").append(position).append(") ").append(message)
-        );*/
+                new StringBuilder().append("(").append(mMessages.get(position).getMessage_id()).append(") ").append(message)
+        );
 
         // Show a different visual treatment for incoming and outgoing messages
         if (messageViewHolder instanceof IncomingViewHolder) {

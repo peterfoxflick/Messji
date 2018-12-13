@@ -14,6 +14,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //Daily Deal stuff
         TextView emoji = this.findViewById(R.id.dailyDealEmoji);
         TextView title = this.findViewById(R.id.dailyTitle);
         TextView description = this.findViewById(R.id.dailyDesc);
@@ -23,5 +24,11 @@ public class ProfileActivity extends AppCompatActivity {
         emoji.setText(dailyDeal.getImageEmoji());
         title.setText(dailyDeal.getTitle());
         description.setText(dailyDeal.getDescription());
+
+
+        //Char count
+        Integer charCountNum = Database.loadCharCount(this);
+        TextView charCount = this.findViewById(R.id.charCount);
+        charCount.setText(charCountNum.toString());
     }
 }

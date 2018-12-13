@@ -29,8 +29,12 @@ public final class Database {
     private static DailyCount charCount;
 
     public static Integer getCharCount() {
-        //loadCharCount(context);
         return charCount.getTodayCount();
+    }
+
+    public static void subtractCharCount(int diff) {
+        charCount.setCount(charCount.getTodayCount() - diff);
+        Log.i("CHAR COUNT", "The current count is " + charCount.getCount().toString());
     }
 
     /**
@@ -86,14 +90,17 @@ public final class Database {
         Gson gson = new Gson();
 
         if(sharedPreferences.contains("Messages")){
+            Log.i("DB Load Messages", "Loading from shared pref");
+
             String data = sharedPreferences.getString("Messages", "");
             messages = gson.fromJson(data, new TypeToken<List<Message>>(){}.getType() );
         } else {
+            Log.i("DB Load Messages", "Loading from r");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.messages)));
             messages = gson.fromJson(bufferedReader, new TypeToken<List<Message>>(){}.getType());
         }
 
-        Log.i("Loaded Messages: ", messages != null ? messages.toString() : null);
+        Log.i("Loaded Messages", messages != null ? messages.toString() : null);
 
     }
 
@@ -107,10 +114,13 @@ public final class Database {
         Gson gson = new Gson();
 
         if(sharedPreferences.contains("Conversations")){
+            Log.i("DB Load Conversation", "Loading from shared pref");
             String data = sharedPreferences.getString("Conversations", "");
             conversations = gson.fromJson(data, new TypeToken<List<Conversation>>(){}.getType() );
         } else {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
+            Log.i("DB Load Conversation", "Loading from R");
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.conversations)));
             conversations = gson.fromJson(bufferedReader, new TypeToken<List<Conversation>>(){}.getType());
         }
 
@@ -119,16 +129,18 @@ public final class Database {
     }
 
     public static Integer loadCharCount(Context context) {
-        SharedPreferences sharedPreferences;
-        sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
         if(sharedPreferences.contains("CharCount")){
+            Log.i("LoadChar", "I found char Count");
             String data = sharedPreferences.getString("CharCount", "0");
             charCount = gson.fromJson(data, DailyCount.class);
         } else {
+            Log.i("LoadChar", "I did not find char count");
+
             charCount = new DailyCount();
-            charCount.setCount(5);
+            charCount.setCount(charCount.getLimit());
         }
 
         return charCount.getTodayCount();
@@ -147,24 +159,26 @@ public final class Database {
      */
     public void save(Context context) {
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences( "Database", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //First save messages
         String data = new Gson().toJson(messages);
         editor.putString("Messages", data);
+        editor.apply();
 
         //Second save conversations
         data = new Gson().toJson(conversations);
         editor.putString("Conversations", data);
+        editor.apply();
 
         //Third save contacts
         data = new Gson().toJson(contacts);
         editor.putString("Users", data);
+        editor.apply();
 
         data = new Gson().toJson(charCount);
         editor.putString("CharCount", data);
-
         editor.apply();
 
     }
@@ -176,13 +190,24 @@ public final class Database {
      * @param message The message to save
      */
     public static void addMessage(Message message, Integer conversationId) {
+        Log.i("addMessage", "About to get conversation with id: " + conversationId.toString());
         Conversation conversation = getConversationFromId(conversationId);
         int id = messages.size();
         message.setMessage_id(id);
-        //conversation.addMessage(conversationId); -- causes crash
-        Log.v("addMessage:", "Message size (before) is: " + messages.size());
+
+        Log.v("addMessage", "Msg id is: " + id);
+
+        Log.v("addMessage", "Conversation size (before) is: " + conversation.getMessages().size());
+
+        assert conversation != null;
+        conversation.addMessage(id);
+
+        Log.v("addMessage", "Conversation size (after) is: " + conversation.getMessages().size());
+
+
+        Log.v("addMessage", "Message size (before) is: " + messages.size());
         messages.add(message);
-        Log.v("addMessage:", "Message size (after) is: " + messages.size());
+        Log.v("addMessage", "Message size (after) is: " + messages.size());
     }
 
     /**
@@ -223,19 +248,17 @@ public final class Database {
 
     public static List<Message> getMessagesFromConversationId(Integer id) {
         Conversation conversation = getConversationFromId(id);
-        List<Integer> testMes = new ArrayList<Integer>();
-        testMes.add(1);
-        testMes.add(3);
-
-        conversation.setMessages(testMes);
 
         if(conversation != null ) {
             List<Message> results = new ArrayList<Message>();
             List<Integer> messageId = conversation.getMessages();
+            Log.i("GetMsgFromConv", "msg ids:" + messageId.toString());
 
-                for (Message m : messages) {
+
+            for (Message m : messages) {
                     Integer message_id = m.getMessage_id();
                     if (messageId.contains(message_id)) {
+                        Log.i("GetMsgFromConv", "Found msg with id:" + m.getMessage_id());
                         results.add(m);
                     }
                 }
@@ -254,7 +277,7 @@ public final class Database {
     }
 
     public static boolean isBelowLimit(Integer newCount){
-        if(newCount + charCount.getCount() <= charCount.getLimit()) {
+        if(charCount.getCount() - newCount >= 0) {
             return true;
         }
         return false;
@@ -275,10 +298,8 @@ public final class Database {
         }
 
         public void setCount(Integer count) {
-            if(count <= limit) {
+            if(count >= 0) {
                 this.count = count;
-            } else {
-                this.count = limit;
             }
         }
 
@@ -301,7 +322,7 @@ public final class Database {
 //                count = 0;
 //            }
 
-            return 5;
+            return count;
         }
 
 

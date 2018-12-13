@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.messji.messji.ConversationPackage.Conversation;
@@ -26,7 +27,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     private EditText editText;
     private ItemAdapter messageAdapter;
     private RecyclerView messagesView;
-    private int convId;
+    private Integer convId;
     private List<Message> messages;
 
 
@@ -34,13 +35,16 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     protected void onCreate(Bundle savedInstanceState) {
 
         Intent intent = getIntent();
-        convId = intent.getIntExtra("convId", -1);
+       // convId = intent.getIntExtra("convId", -1);
 
         Serializable convExtra = getIntent().getSerializableExtra("Conversation");
         Log.d("onCreate:", "Conversation is: " + convExtra);
-        Conversation conversation = new Gson().fromJson(convExtra.toString(), Conversation.class);
 
-        this.setTitle("Conversation Title: " + conversation.getTitle()); //TODO: this
+        Conversation conversation = new Gson().fromJson(convExtra.toString(), Conversation.class);
+        convId = conversation.getId();
+
+        //this.setTitle("Conversation Title: " + conversation.getTitle()); //TODO: this
+        this.setTitle(Database.loadCharCount(this).toString()); 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);
@@ -52,7 +56,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         //Use conv ID to populate messages here
 
-        messages = Database.getMessagesFromConversationId(1);
+        messages = Database.getMessagesFromConversationId(convId);
 
         messageAdapter = new ItemAdapter(messages);
         messagesView = findViewById(R.id.messages_view);
@@ -90,6 +94,8 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                     Log.d("getMessages:", "Size is: " + Database.getMessages().size());
                     messages.add(message);
                     messageAdapter.notifyItemInserted(messages.size() - 1);
+
+                    Database.subtractCharCount(message.getText().length());
                 }
 
                 // scroll the RecyclerView to the last added element
@@ -97,16 +103,18 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
             }
         });
 
+
+        this.setTitle(Database.getCharCount().toString()); //TODO: this
+
         // Clear the text field after sending the message
         editText.getText().clear();
     }
 
-    public void onClose() {
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("draftText", editText.getText().toString());
-        editor.putInt("convId", convId);
-        editor.commit();
+    public void onPause() {
+        super.onPause();
+        Database db = new Database();
+        db.save(this);
     }
+
 }
 

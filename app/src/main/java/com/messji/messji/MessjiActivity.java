@@ -5,12 +5,14 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.messji.messji.ContactPackage.Contact;
 import com.messji.messji.ContactPackage.ContactsActivity;
+import com.messji.messji.ConversationPackage.Conversation;
 import com.messji.messji.ConversationPackage.ConversationFragment;
 
 public class MessjiActivity extends AppCompatActivity {
@@ -21,21 +23,18 @@ public class MessjiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //Load in from database
-        Database.loadConversations(this);
-
-        //Get shared preferences
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        int lastConvId = prefs.getInt("conversationId", -1);
-        if (lastConvId > -1) {
-            //if in conversation go there
-
-            Intent intent = new Intent(this, MessengerActivity.class);
-            // this will not be Contact class, it will be a conversation
-            intent.putExtra("myContact", myContact);
-            intent.putExtra("lastConvId", lastConvId);
-            startActivity(intent);
-        }
+//        //Get shared preferences --This will work one day....
+//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//        int lastConvId = prefs.getInt("conversationId", -1);
+//        if (lastConvId > -1) {
+//            //if in conversation go there
+//
+//            Intent intent = new Intent(this, MessengerActivity.class);
+//            // this will not be Contact class, it will be a conversation
+//            intent.putExtra("myContact", myContact);
+//            intent.putExtra("lastConvId", lastConvId);
+//            startActivity(intent);
+//        }
 
         //else
 
@@ -45,6 +44,8 @@ public class MessjiActivity extends AppCompatActivity {
 
         // Construct the data source
         Database.loadConversations(this);
+        Conversation conversation = (Conversation) Database.getConversations().get(0);
+        Log.i("Loading Mesgi", "Conversation title: " + conversation.getTitle());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.heregoesthething, new ConversationFragment()).commit();
     }

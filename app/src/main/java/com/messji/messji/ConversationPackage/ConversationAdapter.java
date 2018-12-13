@@ -37,12 +37,13 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHo
     @Override
     public void onBindViewHolder(@NonNull ConversationViewHolder conversationViewHolder, final int position) {
         Log.d("On Bind View", "Youre in");
+        Conversation conversation = mConversation.get(position);
 
         // Get the message at the position in the list and set the text to the view holder
         //String title = mConversation.get(position).getTitle();
-        System.out.println("The MessageID name is: " + mConversation.get(position).id);
+        Log.i("Conversation Build:", "Conversation title: " + conversation.getTitle() + " And id is: " + conversation.getId());
 
-        conversationViewHolder.mName.setText("Julius Caesar");
+        conversationViewHolder.mName.setText(conversation.getTitle());
         conversationViewHolder.mLastMessage.setText(mConversation.get(position).title);
         conversationViewHolder.mTimeStamp.setText("4:53 PM 11/28/2018");
         conversationViewHolder.mAvatar.setImageResource(R.drawable.avitar);

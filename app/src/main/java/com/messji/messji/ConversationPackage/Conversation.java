@@ -1,5 +1,7 @@
 package com.messji.messji.ConversationPackage;
 
+import android.util.Log;
+
 import java.util.List;
 
 public class Conversation {

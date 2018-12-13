@@ -38,11 +38,13 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
        // convId = intent.getIntExtra("convId", -1);
 
         Serializable convExtra = getIntent().getSerializableExtra("Conversation");
+        Log.d("onCreate:", "Conversation is: " + convExtra);
 
         Conversation conversation = new Gson().fromJson(convExtra.toString(), Conversation.class);
         convId = conversation.getId();
 
-        this.setTitle(Database.loadCharCount(this).toString()); //TODO: this
+        //this.setTitle("Conversation Title: " + conversation.getTitle()); //TODO: this
+        this.setTitle("You have " + Database.loadCharCount(this).toString() + " characters left");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);
@@ -70,13 +72,13 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
     }
 
-    ;
+    //;
 
     public void sendMessage(View view) {
         Log.v("sendMessage", "IN SEND MESSAGE FUNCTION");
 
         // if the clientID of the message sender is the same as our's it was sent by us
-        boolean belongsToCurrentUser = true; //Just for now
+        boolean belongsToCurrentUser = true; //If it is being sent, the message is from us
 
         /*
             TODO: The user id needs to the user id

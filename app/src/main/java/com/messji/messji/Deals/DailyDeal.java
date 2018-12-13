@@ -20,9 +20,9 @@ public class DailyDeal {
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
-        return new FridayDeal(message);
 
-        //return new WednesdayDeal(message);
+        // NOTICE: THIS IS HARDCODED FOR TESTING PURPOSES!
+        return new WednesdayDeal(message);
 
 //        switch (day) {
 //            case Calendar.MONDAY:
@@ -32,13 +32,13 @@ public class DailyDeal {
 //            case Calendar.WEDNESDAY:
 //                return new WednesdayDeal(message);
 //            case Calendar.THURSDAY:
-//                return null;
+//                 return new ThursdayDeal(message);
 //            case Calendar.FRIDAY:
-//                return null;
+//                 return new FridayDeal(message);
 //            case Calendar.SATURDAY:
-//                return null;
+//                 return new SaturdayDeal(message);
 //            case Calendar.SUNDAY:
-//                return null;
+//                 return new SundayDeal(message);
 //            default:
 //                return new DailyDeal(message);
 //        }

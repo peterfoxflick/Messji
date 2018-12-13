@@ -44,7 +44,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         convId = conversation.getId();
 
         //this.setTitle("Conversation Title: " + conversation.getTitle()); //TODO: this
-        this.setTitle(Database.loadCharCount(this).toString()); 
+        this.setTitle("You have " + Database.loadCharCount(this).toString() + " characters left");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messenger);

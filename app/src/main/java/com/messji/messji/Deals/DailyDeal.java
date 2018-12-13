@@ -21,7 +21,7 @@ public class DailyDeal {
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
         // NOTICE: THIS IS HARDCODED FOR TESTING PURPOSES!
-//        return new WednesdayDeal(message);
+        return new FridayDeal(message);
 
         switch (day) {
             case Calendar.MONDAY:

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.messji.messji.ConversationPackage.Conversation;
+import com.messji.messji.Deals.DailyDeal;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,7 +70,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
             Instead, I included the RecyclerView in the activity layout and configure it above
         */
         //getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ItemFragment()).commit();
-
     }
 
     //;
@@ -84,18 +84,21 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
             TODO: The user id needs to the user id
          */
 
+
         final Message message = new Message(editText.getText().toString(), 1);
+
+        final DailyDeal dailyDeal = DailyDeal.getTodaysDeal(message);
+
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
-                if (Database.isBelowLimit(message.getText().length())) {
-                    Database.addMessage(message, convId);
+                if (dailyDeal.canSend()) {
                     Log.d("getMessages:", "Size is: " + Database.getMessages().size());
                     messages.add(message);
                     messageAdapter.notifyItemInserted(messages.size() - 1);
-
-                    Database.subtractCharCount(message.getText().length());
+                    dailyDeal.outgoingMessage(convId);
                 }
 
                 // scroll the RecyclerView to the last added element
@@ -105,7 +108,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
 
         this.setTitle("You have " + Database.getCharCount().toString() + " characters left");
-        //this.setTitle(Database.getCharCount().toString());
 
         // Clear the text field after sending the message
         editText.getText().clear();

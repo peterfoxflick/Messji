@@ -1,25 +1,25 @@
 [
   {
     "message_id": 0,
-    "user_id": 1,
+    "user_id": 2,
     "timestamp": "2010-10-27T11:58:22.973Z",
     "text": "Hey, where are you?"
   },
   {
     "message_id": 1,
-    "user_id": 1,
+    "user_id": 2,
     "timestamp": "2010-10-27T11:58:22.973Z",
     "text": "Are you here?"
   },
   {
     "message_id": 2,
-    "user_id": 1,
+    "user_id": 2,
     "timestamp": "2010-10-27T11:58:22.973Z",
     "text": "Just got the letter, thanks"
   },
   {
     "message_id": 3,
-    "user_id": 1,
+    "user_id": 2,
     "timestamp": "2010-10-27T11:58:22.973Z",
     "text": "Sushi for lunch?"
   },

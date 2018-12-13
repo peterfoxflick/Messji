@@ -25,19 +25,19 @@
   },
   {
     "message_id": 4,
-    "user_id": 1,
+    "user_id": 3,
     "timestamp": "2010-10-27T11:58:22.973Z",
     "text": "Party this weekend?"
   },
   {
     "message_id": 5,
-    "user_id": 1,
+    "user_id": 3,
     "timestamp": "2010-10-27T11:58:22.973Z",
     "text": "When are we going to see that new movie"
   },
   {
     "message_id": 6,
-    "user_id": 1,
+    "user_id": 3,
     "timestamp": "2010-10-27T11:58:22.973Z",
     "text": "Wheres your dog?"
   }

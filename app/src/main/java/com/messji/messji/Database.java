@@ -224,6 +224,16 @@ public final class Database {
         return null;
     }
 
+
+    public static Contact getContactFromId(Integer id){
+        for(Contact c: contacts){
+            if (c.getId() == id){
+                return c;
+            }
+        }
+        return null;
+    }
+
     /**
      * retrieves a list of messages that are in a conversation
      * @param conversation the conversation object to pull messages from
@@ -264,6 +274,31 @@ public final class Database {
                 }
 
                 return results;
+        }
+        return null;
+    }
+
+    public static List<Contact> getContactsFromConversation(Conversation conversation){
+        if(conversation != null ) {
+            List<Integer> contactIds = new ArrayList<Integer>();
+
+            List<Message> mMessages = getMessagesFromConversation(conversation);
+            List<Integer> messageId = conversation.getMessages();
+
+
+            for (Message m : mMessages) {
+                Integer contact_id = m.getUser_id();
+                if (!contactIds.contains(contact_id)) {
+                    contactIds.add(contact_id);
+                }
+            }
+
+            List<Contact> results = new ArrayList<>();
+            for(Integer i : contactIds){
+                results.add(getContactFromId(i));
+            }
+
+            return results;
         }
         return null;
     }

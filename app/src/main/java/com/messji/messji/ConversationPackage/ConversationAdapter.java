@@ -9,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
+import com.messji.messji.ContactPackage.Contact;
+import com.messji.messji.Database;
 import com.messji.messji.MessengerActivity;
 import com.messji.messji.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHolder> {
@@ -38,15 +41,33 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHo
     public void onBindViewHolder(@NonNull ConversationViewHolder conversationViewHolder, final int position) {
         Log.d("On Bind View", "Youre in");
         Conversation conversation = mConversation.get(position);
+        List<Contact> senders = Database.getContactsFromConversation(conversation);
 
         // Get the message at the position in the list and set the text to the view holder
-        //String title = mConversation.get(position).getTitle();
         Log.i("Conversation Build:", "Conversation title: " + conversation.getTitle() + " And id is: " + conversation.getId());
 
-        conversationViewHolder.mName.setText(conversation.getTitle());
-        conversationViewHolder.mLastMessage.setText(mConversation.get(position).title);
+        String name = "";
+        for(Contact c : senders){
+            name += c.getFullName() + " ";
+        }
+
+
+        conversationViewHolder.mName.setText(name);
+        conversationViewHolder.mLastMessage.setText(conversation.getTitle());
         conversationViewHolder.mTimeStamp.setText("4:53 PM 11/28/2018");
-        conversationViewHolder.mAvatar.setImageResource(R.drawable.avitar);
+
+
+
+        int hexPhoto = R.drawable.ic_users_1;
+
+        if (senders.get(0).getPhoto() == 2)
+            hexPhoto = R.drawable.ic_users_2;
+
+        if (senders.get(0).getPhoto() == 3)
+            hexPhoto = R.drawable.ic_users_3;
+
+
+        conversationViewHolder.mAvatar.setImageResource(hexPhoto);
 
 
         conversationViewHolder.mBackground.setOnClickListener(new View.OnClickListener() {

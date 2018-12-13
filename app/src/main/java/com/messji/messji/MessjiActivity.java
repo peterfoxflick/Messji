@@ -43,7 +43,7 @@ public class MessjiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_messji);
 
         // Construct the data source
-        Database.loadConversations(this);
+        Database.loadDatabase(this);
         Conversation conversation = (Conversation) Database.getConversations().get(0);
         Log.i("Loading Mesgi", "Conversation title: " + conversation.getTitle());
 

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.messji.messji.ContactPackage.Contact;
 import com.messji.messji.Database;
 import com.messji.messji.R;
 

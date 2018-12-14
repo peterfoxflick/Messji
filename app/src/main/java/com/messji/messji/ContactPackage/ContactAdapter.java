@@ -16,6 +16,9 @@ import com.messji.messji.R;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Henrique Tedeschi
+ */
 public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> implements Serializable {
     private List<Contact> mContact;
 
@@ -24,6 +27,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         mContact = contacts;
     }
 
+    /**
+     * Will create the ViewHolder, in this case a contact_item found in R.layout.*
+     * @param viewGroup
+     * @param viewType
+     * @return Returns the view, in this case a contact_item found in R.layout.*
+     */
     // For when the view holder is initially created
     @NonNull
     @Override
@@ -35,6 +44,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         return new ContactViewHolder(view);
     }
 
+    /**
+     * Everytime an item in the Recycler View is created, this will get the current data from the database and fill the data in the layout
+     * @param contactViewHolder
+     * @param position
+     */
     // For when the view holder is bound to a new position
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder contactViewHolder, final int position) {
@@ -71,6 +85,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
         });
     }
 
+    /**
+     * @return Returns the number of items (Contacts) in the adapter
+     */
     // For getting the number of items in the adapter
     @Override
     public int getItemCount() {

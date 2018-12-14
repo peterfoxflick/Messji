@@ -13,11 +13,18 @@ import com.messji.messji.ContactPackage.ContactsActivity;
 import com.messji.messji.ConversationPackage.Conversation;
 import com.messji.messji.ConversationPackage.ConversationFragment;
 
+/**
+ * @author Henrique Tedeschi
+ */
 public class MessjiActivity extends AppCompatActivity {
 
     Contact myContact = new Contact("Douglas", "C. Hanson", "+18017457869", R.drawable.avitar);
     Contact[] contacts = null;
 
+    /**
+     * When the main activity is created, fill the recycler view with the conversations
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -32,12 +39,26 @@ public class MessjiActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.heregoesthething, new ConversationFragment()).commit();
     }
 
+    /**
+     * Will create the options on the toolbar of the activity
+     * @param menu
+     * @return Returns {@link true}
+     */
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
 
+
+    /**
+     * Will choose what to do according to the button clicked on the toolbar of the activity.
+     * If clicked on new conversation, start the contacts activity
+     * If clicked on profile, start the profile activity
+     * If none of those, do nothing
+     * @param item
+     * @return Returns {@link true} unless clicked on an invalid option, then returns the item selected
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_new_converstaion:

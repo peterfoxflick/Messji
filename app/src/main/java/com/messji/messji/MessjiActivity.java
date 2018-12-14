@@ -1,8 +1,6 @@
 package com.messji.messji;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,22 +21,6 @@ public class MessjiActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-//        //Get shared preferences --This will work one day....
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//        int lastConvId = prefs.getInt("conversationId", -1);
-//        if (lastConvId > -1) {
-//            //if in conversation go there
-//
-//            Intent intent = new Intent(this, MessengerActivity.class);
-//            // this will not be Contact class, it will be a conversation
-//            intent.putExtra("myContact", myContact);
-//            intent.putExtra("lastConvId", lastConvId);
-//            startActivity(intent);
-//        }
-
-        //else
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messji);
 
@@ -51,7 +33,6 @@ public class MessjiActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;

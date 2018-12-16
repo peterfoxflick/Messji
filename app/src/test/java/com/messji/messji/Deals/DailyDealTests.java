@@ -1,6 +1,8 @@
 package com.messji.messji.Deals;
 
+import com.messji.messji.Database;
 import com.messji.messji.Message;
+
 
 import org.junit.Test;
 
@@ -10,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class DailyDealTests {
 
-    DailyDeal todaysDeal = DailyDeal.getTodaysDeal(new Message("\uD83C\uDF2E Message", 0, 0, true));
+    private DailyDeal todaysDeal = DailyDeal.getTodaysDeal(new Message("\uD83C\uDF2E Message", 0, 0, true));
 
     @Test
     public void getTodaysDeal() {
@@ -20,24 +22,28 @@ public class DailyDealTests {
         switch (day) {
             case Calendar.MONDAY:
                 assertTrue(todaysDeal instanceof MondayDeal);
+                break;
             case Calendar.TUESDAY:
                 assertTrue(todaysDeal instanceof TuesdayDeal);
+                break;
             case Calendar.WEDNESDAY:
                 assertTrue(todaysDeal instanceof WednesdayDeal);
+                break;
             case Calendar.THURSDAY:
-                assertTrue(true);
-                // assertTrue(todaysDeal instanceof ThursdayDeal);
+                assertTrue(todaysDeal instanceof ThursdayDeal);
+                break;
             case Calendar.FRIDAY:
-                assertTrue(true);
-                // assertTrue(todaysDeal instanceof FridayDeal);
+                assertTrue(todaysDeal instanceof FridayDeal);
+                break;
             case Calendar.SATURDAY:
-                assertTrue(true);
-                // assertTrue(todaysDeal instanceof SaturdayDeal);
+                assertTrue(todaysDeal instanceof SaturdayDeal);
+                break;
             case Calendar.SUNDAY:
-                assertTrue(true);
-                // assertTrue(todaysDeal instanceof SundayDeal);
+                assertTrue(todaysDeal instanceof SundayDeal);
+                break;
             default:
                 assertTrue(false);
+                break;
         }
     }
 
@@ -81,15 +87,19 @@ public class DailyDealTests {
     }
 
     @Test
-    public void outgoingMessage() {
-    }
-
-    @Test
-    public void incomingMessage() {
-    }
-
-    @Test
     public void subtractCharCount() {
+        Database db = new Database();
+        DailyDeal dd = new DailyDeal(null);
+
+        int before = db.getCharCount();
+        int after;
+        int subtract = 10;
+
+        dd.subtractCharCount(subtract);
+
+        after = db.getCharCount();
+
+        assertTrue(before > after);
     }
 
     @Test
@@ -104,5 +114,6 @@ public class DailyDealTests {
 
     @Test
     public void canSend() {
+        assertTrue(todaysDeal.canSend());
     }
 }

@@ -15,6 +15,16 @@ public class ContactViewHolder extends RecyclerView.ViewHolder {
     TextView cPhoneNumber;
     ImageView cAvatar;
 
+    /**
+     * Gets a view, finds the elements and set them as variables.
+     * The variables are:
+     * {@link LinearLayout} cBackground
+     * {@link TextView} cFullName
+     * {@link TextView} cPhoneNumber
+     * {@link ImageView} cAvatar
+     *
+     * @param view
+     */
     // When instantiated, call the super method and then override the bubble type to incoming
     ContactViewHolder(@NonNull View view) {
         super(view);

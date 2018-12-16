@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.messji.messji.contact.Contact;
 import com.messji.messji.Database;
 import com.messji.messji.MessengerActivity;
 import com.messji.messji.R;
+import com.messji.messji.contact.Contact;
 
 import java.util.List;
 

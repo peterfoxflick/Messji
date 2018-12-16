@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * The adapter for the RecyclerView, which shows messages on the screen

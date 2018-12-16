@@ -29,14 +29,17 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     @Override
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         Log.v("MessageViewHolder:", "In MessageViewHoler");
-        Log.d("MessageViewHolder:", "viewType is: " + viewType);
 
         // Inflate the item layout when the view holder is created
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.fragment_item, viewGroup, false);
 
         // Depending on the view type, either return the incoming or outgoing view holder
+<<<<<<< HEAD
         if (mMessages.get(viewType).getUser_id() != 1) { //Our user ID is 1
+=======
+        if (mMessages.get(viewType).getUser_id() != 1) {     //Our user ID is 1
+>>>>>>> c9952ccd89c6394967a6f6f395634f4101380b5c
             return new IncomingViewHolder(view);
         } else {
             return new OutgoingViewHolder(view);
@@ -46,10 +49,9 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     // For when the view holder is bound to a new position
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder messageViewHolder, int position) {
-        Log.d("On Message View", "Youre in");
+        Log.d("onBindViewHolder", "In onBindView Holder");
         // Get the message at the position in the list and set the text to the view holder
         String message = mMessages.get(position).getText();
-        Log.v("onBindViewHolder:", "message is: " + message);
 
         messageViewHolder.mBubbleContent.setText(message);
 
@@ -66,9 +68,8 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
     // For checking what type of view should be returned based on the adapter position
     @Override
     public int getItemViewType(int position) {
-        Log.d("getItemViewType", "Position is: " + position); // Just check if from editText?
+        Log.d("getItemViewType", "Position is: " + position);
         return position;
-        //return new Random().nextInt(2);
     }
 
     // For getting the number of items in the adapter

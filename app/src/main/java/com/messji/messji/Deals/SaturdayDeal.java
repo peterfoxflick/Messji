@@ -1,9 +1,18 @@
 package com.messji.messji.Deals;
 
 import com.messji.messji.Message;
+import com.vdurmont.emoji.EmojiParser;
 
+/**
+ * @author Henrique Tedeschi
+ */
 public class SaturdayDeal extends DailyDeal {
 
+
+    /**
+     * SaturdayDeal Constructor
+     * @param message
+     */
     protected SaturdayDeal(Message message) {
         super(message);
 
@@ -15,6 +24,9 @@ public class SaturdayDeal extends DailyDeal {
         setImageEmoji("\uD83D\uDCB0");
     }
 
+    /**
+     * Will check if the incoming message has a bag of money (💰) emoji. If so, will subtract 10 chars from the user who received the message
+     */
     @Override
     public void incomingMessage() {
         int bags = getCharCount(getImageEmoji());
@@ -26,8 +38,13 @@ public class SaturdayDeal extends DailyDeal {
 
     }
 
+
+    /**
+     * @return Returns the size of the message (disregarding the emojis) subtracted by 10
+     */
     @Override
     protected int getLength() {
+        int length =  EmojiParser.removeAllEmojis(getMessage().getText()).length();
         int bags = getCharCount(getImageEmoji());
         int points = 0;
 
@@ -35,6 +52,6 @@ public class SaturdayDeal extends DailyDeal {
             points = 10;
         }
 
-        return getMessage().getText().length() - points;
+        return length - points;
     }
 }

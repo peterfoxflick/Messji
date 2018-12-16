@@ -17,6 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactFragment extends Fragment {
+    /**
+     * Creates the view. Will run through the adapters to fill the data.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return Returns a view
+     */
     // For when the view is first created
     @Nullable
     @Override

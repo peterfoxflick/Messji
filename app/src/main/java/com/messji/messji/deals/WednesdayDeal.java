@@ -23,7 +23,7 @@ public class WednesdayDeal extends DailyDeal {
         int camel = getCharCount(getImageEmoji());
         int twoHumpCamel = getCharCount("\uD83D\uDC2B");
 
-        if((twoHumpCamel + camel) > 0) {
+        if ((twoHumpCamel + camel) > 0) {
             int bonus = Database.getCharCount() / 10;
             //Add a 10 percent of what their current count is
             subtractCharCount(bonus * (-1));

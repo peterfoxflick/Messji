@@ -11,6 +11,7 @@ public class SaturdayDeal extends DailyDeal {
 
     /**
      * SaturdayDeal Constructor
+     *
      * @param message
      */
     protected SaturdayDeal(Message message) {
@@ -30,8 +31,7 @@ public class SaturdayDeal extends DailyDeal {
     @Override
     public void incomingMessage() {
         int bags = getCharCount(getImageEmoji());
-        if (bags > 0)
-        {
+        if (bags > 0) {
             //Future Note: cap the emoji limit
             subtractCharCount(10);
         }
@@ -44,11 +44,11 @@ public class SaturdayDeal extends DailyDeal {
      */
     @Override
     protected int getLength() {
-        int length =  EmojiParser.removeAllEmojis(getMessage().getText()).length();
+        int length = EmojiParser.removeAllEmojis(getMessage().getText()).length();
         int bags = getCharCount(getImageEmoji());
         int points = 0;
 
-        if (bags > 0){
+        if (bags > 0) {
             points = 10;
         }
 

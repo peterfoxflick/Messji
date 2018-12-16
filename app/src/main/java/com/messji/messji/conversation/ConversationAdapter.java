@@ -46,7 +46,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHo
         Log.i("Conversation Build:", "Conversation title: " + conversation.getTitle() + " And id is: " + conversation.getId());
 
         String name = "";
-        for(Contact c : senders){
+        for (Contact c : senders) {
             name += c.getFullName() + " ";
         }
 
@@ -54,7 +54,6 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHo
         conversationViewHolder.mName.setText(name);
         conversationViewHolder.mLastMessage.setText(conversation.getTitle());
         conversationViewHolder.mTimeStamp.setText("4:53 PM 11/28/2018");
-
 
 
         int hexPhoto = R.drawable.ic_users_1;

@@ -29,6 +29,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
 
     /**
      * Will create the ViewHolder, in this case a contact_item found in R.layout.*
+     *
      * @param viewGroup
      * @param viewType
      * @return Returns the view, in this case a contact_item found in R.layout.*
@@ -46,6 +47,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactViewHolder> impl
 
     /**
      * Everytime an item in the Recycler View is created, this will get the current data from the database and fill the data in the layout
+     *
      * @param contactViewHolder
      * @param position
      */

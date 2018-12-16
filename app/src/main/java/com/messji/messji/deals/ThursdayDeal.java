@@ -18,7 +18,7 @@ public class ThursdayDeal extends DailyDeal {
 
     @Override
     protected int getLength() {
-        int length =  EmojiParser.removeAllEmojis(getMessage().getText()).length();
+        int length = EmojiParser.removeAllEmojis(getMessage().getText()).length();
         int emojis = getCharCount(":"); // temporary fix, needs to regex filter for the whole ":)" emoji
         //int partyEmoji = getCharCount("*<(:D)");
         int points = emojis * 10;

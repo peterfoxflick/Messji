@@ -16,7 +16,7 @@ public class ConversationTest {
     private Integer _idMessage;
     private String _title;
     private String _message;
-    private List<Integer> _messagesList ;
+    private List<Integer> _messagesList;
     private List<Integer> _messages;
 
 

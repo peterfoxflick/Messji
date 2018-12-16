@@ -15,6 +15,7 @@ public class Contact implements Serializable {
 
     /**
      * Contact constructor
+     *
      * @param firstName
      * @param lastName
      * @param phoneNumber
@@ -36,6 +37,7 @@ public class Contact implements Serializable {
 
     /**
      * Sets the Contact id
+     *
      * @param id
      */
     public void setId(int id) {
@@ -51,6 +53,7 @@ public class Contact implements Serializable {
 
     /**
      * Sets the Contact First Name
+     *
      * @param firstName
      */
     public void setFirstName(String firstName) {
@@ -66,6 +69,7 @@ public class Contact implements Serializable {
 
     /**
      * Sets the Contact Last Name
+     *
      * @param lastName
      */
     public void setLastName(String lastName) {
@@ -81,6 +85,7 @@ public class Contact implements Serializable {
 
     /**
      * Sets the Contact Phone Number
+     *
      * @param phoneNumber
      */
     public void setPhoneNumber(String phoneNumber) {
@@ -98,6 +103,7 @@ public class Contact implements Serializable {
     /**
      * Sets the Contact Photo
      * It should set an integer corresponding to a Resource found in R.drawable.*
+     *
      * @param photo
      */
     public void setPhoto(int photo) {
@@ -112,7 +118,7 @@ public class Contact implements Serializable {
 
         if (firstName.isEmpty() && lastName.isEmpty())
             return phoneNumber;
-        
+
         return firstName + " " + lastName;
     }
 }

@@ -23,12 +23,12 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     private RecyclerView messagesView;
     private Integer convId;
     private List<Message> messages;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Intent intent = getIntent();
-       // convId = intent.getIntExtra("convId", -1);
+        // convId = intent.getIntExtra("convId", -1);
 
         Serializable convExtra = getIntent().getSerializableExtra("Conversation");
         Log.d("onCreate:", "Conversation is: " + convExtra);

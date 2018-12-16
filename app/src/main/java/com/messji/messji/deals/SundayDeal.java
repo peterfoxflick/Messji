@@ -27,7 +27,7 @@ public class SundayDeal extends DailyDeal {
 
     @Override
     protected int getLength() {
-        int length =  EmojiParser.removeAllEmojis(getMessage().getText()).length();
+        int length = EmojiParser.removeAllEmojis(getMessage().getText()).length();
         int balls = getCharCount(getImageEmoji());
         int points = balls * 10;
         return length - points;

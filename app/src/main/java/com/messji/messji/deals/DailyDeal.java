@@ -20,6 +20,7 @@ public class DailyDeal {
 
     /**
      * Constructor for a DailyDeal
+     *
      * @param message
      */
     protected DailyDeal(Message message) {
@@ -28,6 +29,7 @@ public class DailyDeal {
 
     /**
      * Will get the current system date and select a deal to return.
+     *
      * @param message
      * @return Returns a Daily Deal. The Daily deals are: MondayDeal, TuesdayDeal, WednesdayDeal, ThursdayDeal, FridayDeal, SaturdayDeal, and SundayDeal.
      */
@@ -47,13 +49,13 @@ public class DailyDeal {
             case Calendar.WEDNESDAY:
                 return new WednesdayDeal(message);
             case Calendar.THURSDAY:
-                 return new ThursdayDeal(message);
+                return new ThursdayDeal(message);
             case Calendar.FRIDAY:
-                 return new FridayDeal(message);
+                return new FridayDeal(message);
             case Calendar.SATURDAY:
-                 return new SaturdayDeal(message);
+                return new SaturdayDeal(message);
             case Calendar.SUNDAY:
-                 return new SundayDeal(message);
+                return new SundayDeal(message);
             default:
                 return new DailyDeal(message);
         }
@@ -69,6 +71,7 @@ public class DailyDeal {
 
     /**
      * Sets the daily deal's title
+     *
      * @param title
      */
     protected void setTitle(String title) {
@@ -77,6 +80,7 @@ public class DailyDeal {
 
     /**
      * Sets the daily deal's description
+     *
      * @param description
      */
     protected void setDescription(String description) {
@@ -85,6 +89,7 @@ public class DailyDeal {
 
     /**
      * Sets the daily deal's emoji
+     *
      * @param imageEmoji
      */
     protected void setImageEmoji(String imageEmoji) {
@@ -98,10 +103,11 @@ public class DailyDeal {
     /**
      * Sets a message. If message is null, return a new message with text "FAKE"
      * This was first made for testing purposes.
+     *
      * @param message
      */
     public void setMessage(Message message) {
-        if(message != null) {
+        if (message != null) {
             this.message = message;
 
         } else {
@@ -118,6 +124,7 @@ public class DailyDeal {
 
     /**
      * Returns the daily deal's emoji
+     *
      * @return
      */
     public String getImageEmoji() {
@@ -126,6 +133,7 @@ public class DailyDeal {
 
     /**
      * Checks if user has enough chars left to send a message
+     *
      * @param conversationId
      * @return True: message sent | False: message not sent
      */
@@ -150,6 +158,7 @@ public class DailyDeal {
     /**
      * Will subtract an amount of chars from the user.
      * To add chars, pass the parameter as a negative Integer.
+     *
      * @param bonus
      */
     protected void subtractCharCount(int bonus) {

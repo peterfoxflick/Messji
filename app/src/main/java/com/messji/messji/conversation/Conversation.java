@@ -3,9 +3,9 @@ package com.messji.messji.conversation;
 import java.util.List;
 
 public class Conversation {
-   int id;
-   private List<Integer> messages;
-   String title;
+    int id;
+    private List<Integer> messages;
+    String title;
 
 
     public int getId() {
@@ -32,13 +32,13 @@ public class Conversation {
         this.title = title;
     }
 
-    public void addMessage(int id){
+    public void addMessage(int id) {
         messages.add(id);
     }
 
-    public Integer getLastMessage(){
+    public Integer getLastMessage() {
         if (messages != null && !messages.isEmpty()) {
-            Integer lastId = messages.get(messages.size()-1);
+            Integer lastId = messages.get(messages.size() - 1);
             return lastId;
         }
 

@@ -10,6 +10,7 @@ public class MondayDeal extends DailyDeal {
     /**
      * MondayDeal Constructor
      * Needs a {@Link Message}
+     *
      * @param message
      */
     protected MondayDeal(Message message) {

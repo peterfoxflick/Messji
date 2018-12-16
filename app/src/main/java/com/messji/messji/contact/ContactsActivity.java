@@ -13,6 +13,7 @@ public class ContactsActivity extends AppCompatActivity {
 
     /**
      * On the create, will set the recycler view ready. It will fill the layout linear_contacts found in R.layout.*
+     *
      * @param savedInstanceState
      */
     @Override
@@ -21,6 +22,6 @@ public class ContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contacts);
 
         Database.loadUsers(this);
-        getSupportFragmentManager().beginTransaction().replace(R.id.linear_contacts , new ContactFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.linear_contacts, new ContactFragment()).commit();
     }
 }

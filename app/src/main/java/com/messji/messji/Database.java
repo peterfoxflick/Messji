@@ -1,7 +1,6 @@
 package com.messji.messji;
 
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -54,6 +53,7 @@ public final class Database {
 
     /**
      * Returns the list of all contacts (contacts lists)
+     *
      * @return List of Users
      */
     public static List getContacts() {
@@ -63,18 +63,21 @@ public final class Database {
     /**
      * Pulls the contacts from the contacts.json file. This acts as an inital list of contacts for the
      * app
+     *
      * @param context Nesccessary to find the file. From an activity just pass in "this"
      */
     public static void loadUsers(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
-        if(sharedPreferences.contains("Users")){
+        if (sharedPreferences.contains("Users")) {
             String data = sharedPreferences.getString("Users", "");
-            contacts = gson.fromJson(data, new TypeToken<List<Contact>>(){}.getType() );
+            contacts = gson.fromJson(data, new TypeToken<List<Contact>>() {
+            }.getType());
         } else {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.contacts)));
-            contacts = gson.fromJson(bufferedReader, new TypeToken<List<Contact>>(){}.getType());
+            contacts = gson.fromJson(bufferedReader, new TypeToken<List<Contact>>() {
+            }.getType());
         }
 
         Log.i("Loaded Users: ", contacts != null ? contacts.toString() : null);
@@ -84,21 +87,24 @@ public final class Database {
     /**
      * Pulls the messages from the messages.json file. This will act as an intial set of messages for
      * the app.
+     *
      * @param context Nesccessary to find the file. From an activity just pass in "this"
      */
     public static void loadMessages(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
-        if(sharedPreferences.contains("Messages")){
+        if (sharedPreferences.contains("Messages")) {
             Log.i("DB Load Messages", "Loading from shared pref");
 
             String data = sharedPreferences.getString("Messages", "");
-            messages = gson.fromJson(data, new TypeToken<List<Message>>(){}.getType() );
+            messages = gson.fromJson(data, new TypeToken<List<Message>>() {
+            }.getType());
         } else {
             Log.i("DB Load Messages", "Loading from r");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.messages)));
-            messages = gson.fromJson(bufferedReader, new TypeToken<List<Message>>(){}.getType());
+            messages = gson.fromJson(bufferedReader, new TypeToken<List<Message>>() {
+            }.getType());
         }
 
         Log.i("Loaded Messages", messages != null ? messages.toString() : null);
@@ -108,21 +114,24 @@ public final class Database {
     /**
      * Pulls the conversations from the conversation.json file. This will act as an intial set of conversations for
      * the app.
+     *
      * @param context Nesccessary to find the file. From an activity just pass in "this"
      */
     public static void loadConversations(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
-        if(sharedPreferences.contains("Conversations")){
+        if (sharedPreferences.contains("Conversations")) {
             Log.i("DB Load Conversation", "Loading from shared pref");
             String data = sharedPreferences.getString("Conversations", "");
-            conversations = gson.fromJson(data, new TypeToken<List<Conversation>>(){}.getType() );
+            conversations = gson.fromJson(data, new TypeToken<List<Conversation>>() {
+            }.getType());
         } else {
             Log.i("DB Load Conversation", "Loading from R");
 
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.conversations)));
-            conversations = gson.fromJson(bufferedReader, new TypeToken<List<Conversation>>(){}.getType());
+            conversations = gson.fromJson(bufferedReader, new TypeToken<List<Conversation>>() {
+            }.getType());
         }
 
         Log.i("Loaded Conversations: ", conversations != null ? conversations.toString() : null);
@@ -133,7 +142,7 @@ public final class Database {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         Gson gson = new Gson();
 
-        if(sharedPreferences.contains("CharCount")){
+        if (sharedPreferences.contains("CharCount")) {
             Log.i("LoadChar", "I found char Count");
             String data = sharedPreferences.getString("CharCount", "0");
             charCount = gson.fromJson(data, DailyCount.class);
@@ -155,7 +164,7 @@ public final class Database {
         return fridayR;
     }
 
-    public static int getFridayR(){
+    public static int getFridayR() {
         if (fridayR != null)
             return fridayR;
         else
@@ -175,7 +184,7 @@ public final class Database {
      */
     public void save(Context context) {
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences( "Database", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Database", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //First save messages
@@ -200,9 +209,11 @@ public final class Database {
     }
 
     // More of the interaction part
+
     /**
      * Adds a message to the database so it can be stored for future use.
      * Note: Needs to still add to conversation list
+     *
      * @param message The message to save
      */
     public static void addMessage(Message message, Integer conversationId) {
@@ -228,12 +239,13 @@ public final class Database {
 
     /**
      * gets a conversation from the database
+     *
      * @param id the id of the conversation to retrive
      * @return the conversation or null if not found
      */
-    public static Conversation getConversationFromId(Integer id){
-        for(Conversation c: conversations){
-            if (c.getId() == id){
+    public static Conversation getConversationFromId(Integer id) {
+        for (Conversation c : conversations) {
+            if (c.getId() == id) {
                 return c;
             }
         }
@@ -241,9 +253,9 @@ public final class Database {
     }
 
 
-    public static Contact getContactFromId(Integer id){
-        for(Contact c: contacts){
-            if (c.getId() == id){
+    public static Contact getContactFromId(Integer id) {
+        for (Contact c : contacts) {
+            if (c.getId() == id) {
                 return c;
             }
         }
@@ -252,13 +264,14 @@ public final class Database {
 
     /**
      * retrieves a list of messages that are in a conversation
+     *
      * @param conversation the conversation object to pull messages from
      * @return the list of messages in that conversation
      */
     public static List<Message> getMessagesFromConversation(Conversation conversation) {
         List<Message> results = new ArrayList<Message>();
 
-        if(conversation != null) {
+        if (conversation != null) {
             List<Integer> messageId = conversation.getMessages();
 
             for (Message m : messages) {
@@ -275,27 +288,27 @@ public final class Database {
     public static List<Message> getMessagesFromConversationId(Integer id) {
         Conversation conversation = getConversationFromId(id);
 
-        if(conversation != null ) {
+        if (conversation != null) {
             List<Message> results = new ArrayList<Message>();
             List<Integer> messageId = conversation.getMessages();
             Log.i("GetMsgFromConv", "msg ids:" + messageId.toString());
 
 
             for (Message m : messages) {
-                    Integer message_id = m.getMessage_id();
-                    if (messageId.contains(message_id)) {
-                        Log.i("GetMsgFromConv", "Found msg with id:" + m.getMessage_id());
-                        results.add(m);
-                    }
+                Integer message_id = m.getMessage_id();
+                if (messageId.contains(message_id)) {
+                    Log.i("GetMsgFromConv", "Found msg with id:" + m.getMessage_id());
+                    results.add(m);
                 }
+            }
 
-                return results;
+            return results;
         }
         return null;
     }
 
-    public static List<Contact> getContactsFromConversation(Conversation conversation){
-        if(conversation != null ) {
+    public static List<Contact> getContactsFromConversation(Conversation conversation) {
+        if (conversation != null) {
             List<Integer> contactIds = new ArrayList<Integer>();
 
             List<Message> mMessages = getMessagesFromConversation(conversation);
@@ -310,7 +323,7 @@ public final class Database {
             }
 
             List<Contact> results = new ArrayList<>();
-            for(Integer i : contactIds){
+            for (Integer i : contactIds) {
                 results.add(getContactFromId(i));
             }
 
@@ -319,16 +332,17 @@ public final class Database {
         return null;
     }
 
-    public void addCount(Integer newCount){
-        if(isBelowLimit(newCount)) {
-            charCount.setCount(newCount + charCount.getCount());;
+    public void addCount(Integer newCount) {
+        if (isBelowLimit(newCount)) {
+            charCount.setCount(newCount + charCount.getCount());
+            ;
             charCount.setDate(new Date());
         }
 
     }
 
-    public static boolean isBelowLimit(Integer newCount){
-        if(charCount.getCount() - newCount >= 0) {
+    public static boolean isBelowLimit(Integer newCount) {
+        if (charCount.getCount() - newCount >= 0) {
             return true;
         }
         return false;
@@ -349,7 +363,7 @@ public final class Database {
         }
 
         public void setCount(Integer count) {
-            if(count >= 0) {
+            if (count >= 0) {
                 this.count = count;
             }
         }
@@ -377,10 +391,7 @@ public final class Database {
         }
 
 
-
-
     }
-
 
 
 }

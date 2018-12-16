@@ -26,7 +26,7 @@ public class TuesdayDeal extends DailyDeal {
 
     @Override
     protected int getLength() {
-        int length =  EmojiParser.removeAllEmojis(getMessage().getText()).length();
+        int length = EmojiParser.removeAllEmojis(getMessage().getText()).length();
         int tacos = getCharCount(getImageEmoji());
         int points = tacos * 5;
         return length - points;

@@ -23,6 +23,7 @@ public class MessjiActivity extends AppCompatActivity {
 
     /**
      * When the main activity is created, fill the recycler view with the conversations
+     *
      * @param savedInstanceState
      */
     @Override
@@ -41,6 +42,7 @@ public class MessjiActivity extends AppCompatActivity {
 
     /**
      * Will create the options on the toolbar of the activity
+     *
      * @param menu
      * @return Returns {@link true}
      */
@@ -56,6 +58,7 @@ public class MessjiActivity extends AppCompatActivity {
      * If clicked on new conversation, start the contacts activity
      * If clicked on profile, start the profile activity
      * If none of those, do nothing
+     *
      * @param item
      * @return Returns {@link true} unless clicked on an invalid option, then returns the item selected
      */

@@ -335,17 +335,13 @@ public final class Database {
     public void addCount(Integer newCount) {
         if (isBelowLimit(newCount)) {
             charCount.setCount(newCount + charCount.getCount());
-            ;
             charCount.setDate(new Date());
         }
 
     }
 
     public static boolean isBelowLimit(Integer newCount) {
-        if (charCount.getCount() - newCount >= 0) {
-            return true;
-        }
-        return false;
+        return charCount.getCount() - newCount >= 0;
     }
 
 

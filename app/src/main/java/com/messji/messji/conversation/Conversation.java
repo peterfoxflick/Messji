@@ -38,8 +38,7 @@ public class Conversation {
 
     public Integer getLastMessage() {
         if (messages != null && !messages.isEmpty()) {
-            Integer lastId = messages.get(messages.size() - 1);
-            return lastId;
+            return messages.get(messages.size() - 1);
         }
 
         return null;

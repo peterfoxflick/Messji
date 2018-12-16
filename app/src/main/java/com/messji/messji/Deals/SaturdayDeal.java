@@ -7,7 +7,7 @@ public class SaturdayDeal extends DailyDeal {
     protected SaturdayDeal(Message message) {
         super(message);
 
-        setTitle("Stealing Saturdat");
+        setTitle("Stealing Saturday");
 
         setDescription("The crime is loose! Sending a special emoji will steal 10 characteres from the contact you send it to!");
 

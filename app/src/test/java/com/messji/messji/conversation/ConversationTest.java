@@ -1,4 +1,4 @@
-package com.messji.messji.ConversationPackage;
+package com.messji.messji.conversation;
 
 import org.junit.Before;
 import org.junit.Test;

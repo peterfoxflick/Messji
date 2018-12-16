@@ -1,4 +1,4 @@
-package com.messji.messji.ContactPackage;
+package com.messji.messji.contact;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

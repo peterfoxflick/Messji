@@ -1,4 +1,4 @@
-package com.messji.messji.Deals;
+package com.messji.messji.deals;
 
 import android.util.Log;
 
@@ -37,6 +37,7 @@ public class DailyDeal {
 
         // NOTICE: This can be hardcoded for testing
         //return new SundayDeal(message);
+        Log.i("DailyDeal", "Today is: " + day);
 
         switch (day) {
             case Calendar.MONDAY:

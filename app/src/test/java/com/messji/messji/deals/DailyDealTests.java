@@ -1,4 +1,4 @@
-package com.messji.messji.Deals;
+package com.messji.messji.deals;
 
 import com.messji.messji.Database;
 import com.messji.messji.Message;

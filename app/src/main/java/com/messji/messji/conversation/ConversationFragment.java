@@ -1,4 +1,4 @@
-package com.messji.messji.ConversationPackage;
+package com.messji.messji.conversation;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.messji.messji.ContactPackage.Contact;
 import com.messji.messji.Database;
 import com.messji.messji.R;
 

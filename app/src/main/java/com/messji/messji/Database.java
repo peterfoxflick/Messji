@@ -8,8 +8,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.messji.messji.ContactPackage.Contact;
-import com.messji.messji.ConversationPackage.Conversation;
+import com.messji.messji.contact.Contact;
+import com.messji.messji.conversation.Conversation;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -168,7 +168,6 @@ public final class Database {
         loadConversations(context);
         loadUsers(context);
         loadCharCount(context);
-
     }
 
     /**

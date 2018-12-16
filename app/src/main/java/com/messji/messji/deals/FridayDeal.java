@@ -1,15 +1,10 @@
-package com.messji.messji.Deals;
+package com.messji.messji.deals;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.messji.messji.Database;
 import com.messji.messji.Message;
 import com.vdurmont.emoji.EmojiParser;
-
-import java.util.Random;
 
 public class FridayDeal extends DailyDeal {
 

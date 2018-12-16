@@ -1,4 +1,4 @@
-package com.messji.messji.ContactPackage;
+package com.messji.messji.contact;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.messji.messji.ConversationPackage.Conversation;
+import com.messji.messji.conversation.Conversation;
 import com.messji.messji.MessengerActivity;
 import com.messji.messji.R;
 

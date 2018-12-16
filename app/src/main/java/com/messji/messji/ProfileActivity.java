@@ -4,8 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.messji.messji.Deals.DailyDeal;
-import com.messji.messji.Deals.MondayDeal;
+import com.messji.messji.deals.DailyDeal;
 
 public class ProfileActivity extends AppCompatActivity {
 

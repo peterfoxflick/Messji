@@ -8,10 +8,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.messji.messji.ContactPackage.Contact;
-import com.messji.messji.ContactPackage.ContactsActivity;
-import com.messji.messji.ConversationPackage.Conversation;
-import com.messji.messji.ConversationPackage.ConversationFragment;
+import com.messji.messji.contact.Contact;
+import com.messji.messji.contact.ContactsActivity;
+import com.messji.messji.conversation.Conversation;
+import com.messji.messji.conversation.ConversationFragment;
 
 /**
  * @author Henrique Tedeschi

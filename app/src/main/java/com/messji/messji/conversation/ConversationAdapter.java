@@ -1,4 +1,4 @@
-package com.messji.messji.ConversationPackage;
+package com.messji.messji.conversation;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.messji.messji.ContactPackage.Contact;
+import com.messji.messji.contact.Contact;
 import com.messji.messji.Database;
 import com.messji.messji.MessengerActivity;
 import com.messji.messji.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConversationAdapter extends RecyclerView.Adapter<ConversationViewHolder> {

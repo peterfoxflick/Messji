@@ -35,11 +35,8 @@ public class ItemAdapter extends RecyclerView.Adapter<MessageViewHolder> {
                 .inflate(R.layout.fragment_item, viewGroup, false);
 
         // Depending on the view type, either return the incoming or outgoing view holder
-<<<<<<< HEAD
-        if (mMessages.get(viewType).getUser_id() != 1) { //Our user ID is 1
-=======
+
         if (mMessages.get(viewType).getUser_id() != 1) {     //Our user ID is 1
->>>>>>> c9952ccd89c6394967a6f6f395634f4101380b5c
             return new IncomingViewHolder(view);
         } else {
             return new OutgoingViewHolder(view);

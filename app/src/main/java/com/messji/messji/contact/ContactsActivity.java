@@ -1,4 +1,4 @@
-package com.messji.messji.ContactPackage;
+package com.messji.messji.contact;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

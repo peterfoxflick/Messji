@@ -30,8 +30,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
     private RecyclerView messagesView;
     private Integer convId;
     private List<Message> messages;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,7 +43,7 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
         Conversation conversation = new Gson().fromJson(convExtra.toString(), Conversation.class);
         convId = conversation.getId();
 
-        //this.setTitle("Conversation Title: " + conversation.getTitle()); //TODO: this
+        //this.setTitle("Conversation Title: " + conversation.getTitle());
         this.setTitle("You have " + Database.loadCharCount(this).toString() + " characters left");
 
         super.onCreate(savedInstanceState);
@@ -53,47 +52,27 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
 
         Database.loadDatabase(this);
 
-        // if negative 1 go back to home
-
-        //Use conv ID to populate messages here
-
+        //Use convID to populate messages here
         messages = Database.getMessagesFromConversationId(convId);
 
         messageAdapter = new ItemAdapter(messages);
         messagesView = findViewById(R.id.messages_view);
         messagesView.setLayoutManager(new LinearLayoutManager(this));
         messagesView.setAdapter(messageAdapter);
-
-        /*
-            NOTE: The line below replaces the whole content of your UI with the ItemFragment() only
-            This was causing the issue where you couldn't tap on the EditText (it didn't exist anymore)
-            Instead, I included the RecyclerView in the activity layout and configure it above
-        */
-        //getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new ItemFragment()).commit();
     }
 
-    //;
-
     public void sendMessage(View view) {
-        Log.v("sendMessage", "IN SEND MESSAGE FUNCTION");
+        Log.v("sendMessage", "In Beginning of Send Message");
 
-        // if the clientID of the message sender is the same as our's it was sent by us
-        boolean belongsToCurrentUser = true; //If it is being sent, the message is from us
-
-        /*
-            TODO: The user id needs to the user id
-         */
-
+        boolean belongsToCurrentUser = true;    //We're the one's sending the message
 
         final Message message = new Message(editText.getText().toString(), 1);
 
         final DailyDeal dailyDeal = DailyDeal.getTodaysDeal(message);
 
-
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 if (dailyDeal.canSend()) {
                     Log.d("getMessages:", "Size is: " + Database.getMessages().size());
                     messages.add(message);
@@ -105,7 +84,6 @@ public class MessengerActivity extends AppCompatActivity implements Serializable
                 messagesView.smoothScrollToPosition(Database.getMessages().size() - 1);
             }
         });
-
 
         this.setTitle("You have " + Database.getCharCount().toString() + " characters left");
 

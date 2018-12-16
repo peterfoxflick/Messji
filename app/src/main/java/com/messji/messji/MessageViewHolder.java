@@ -11,7 +11,6 @@ import android.widget.TextView;
  */
 class MessageViewHolder extends RecyclerView.ViewHolder {
 
-    // OG code
     public View avatar;
     public TextView name;
     public TextView messageBody;

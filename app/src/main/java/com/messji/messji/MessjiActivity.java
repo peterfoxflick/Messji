@@ -38,7 +38,6 @@ public class MessjiActivity extends AppCompatActivity {
 
         //else
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messji);
 

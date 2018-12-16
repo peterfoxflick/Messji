@@ -34,7 +34,7 @@ public class MessjiActivity extends AppCompatActivity {
         // Construct the data source
         Database.loadDatabase(this);
         Conversation conversation = (Conversation) Database.getConversations().get(0);
-        Log.i("Loading Mesgi", "Conversation title: " + conversation.getTitle());
+        Log.i("Loading Messji", "Conversation title: " + conversation.getTitle());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.heregoesthething, new ConversationFragment()).commit();
     }

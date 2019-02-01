@@ -3,7 +3,7 @@ Our messenger app that counts and limits your char (but not emojis 😉)
 
 ## The Team
 
-The Messji Team consisted of [Peter Flickinger](https://peterfoxflick.github.io/), [Henrique Tedeschi](henriquetedeschi.com), and Thomas. Together we worked with our mentor Justin (Android UX Engineer at Google) to create a messenger application. The team focused on learning Java and Android's environment while writing this app. This projected provided a fun way to get introduced into the Android development world. Each student participated equally in coding the project and committed significant changes to GitHub. 
+The Messji Team consisted of [Peter Flickinger](https://peterfoxflick.github.io/), [Henrique Tedeschi](http://www.henriquetedeschi.com/), and Thomas. Together we worked with our mentor Justin (Android UX Engineer at Google) to create a messenger application. The team focused on learning Java and Android's environment while writing this app. This projected provided a fun way to get introduced into the Android development world. Each student participated equally in coding the project and committed significant changes to GitHub. 
 
 ## The Project
 

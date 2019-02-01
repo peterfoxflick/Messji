@@ -9,8 +9,8 @@ The Messji Team consisted of Peter Flickinger, Henrique, and Thomas. Together we
 
 
 ![Home Screens](MainScreens.png)
-![Daily Deals 1](DailyDeals1.png)
-![Daily Deals 2](DailyDeals2.png)
+![Daily Deals 1](DailyDeals2.png)
+![Daily Deals 2](DailyDeals1.png)
 
 
 

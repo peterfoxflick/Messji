@@ -1,7 +1,14 @@
 # Messji
 Our messenger app that counts and limits your char (but not emojis 😉)
 
-Well post more stuff here later.
+## The Team
+
+
+## The Project
+
+
+![Home Screens](MainScreens.png)
+
 
 LINKS:  
 [Trello Board 🐺](https://trello.com/b/ToJsQBHP/messji)  

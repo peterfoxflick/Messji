@@ -7,9 +7,12 @@ The Messji Team consisted of Peter Flickinger, Henrique, and Thomas. Together we
 
 ## The Project
 
+The bulk of the project was spent on getting the backbones for a messenger app built. However, to spice up the app, depending on the day different emojis have different impacts on your daily limit of characters that you can send. For example, if you get a camel on Wednesday, you get a special bonus. 
 
 ![Home Screens](MainScreens.png)
+
 ![Daily Deals 1](DailyDeals2.png)
+
 ![Daily Deals 2](DailyDeals1.png)
 
 
